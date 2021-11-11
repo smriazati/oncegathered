@@ -13,7 +13,7 @@
             />
           </figure>
           <figure v-else>
-            <LogoLottie :width="1030" :height="111" />
+            <LogoLottie path="/lottie/logo/data.json" />
           </figure>
         </div>
         <h1 v-if="siteSettings.siteTitle" class="visually-hidden">
@@ -134,7 +134,7 @@ export default {
   },
   head() {
     return {
-      title: "Once Gathered",
+      title: "Coming Soon",
     };
   },
   data() {
