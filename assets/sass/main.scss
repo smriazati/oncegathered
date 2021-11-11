@@ -190,6 +190,12 @@ main.lp-grid {
       ul.inner-grid {
         padding: 88px 0;
 
+        li span {
+          padding-bottom: 18px;
+          transition: $bgHoverTransition;
+          border-bottom: 1px solid transparent;
+        }
+
         li:hover span {
           border-bottom: 1px solid black;
         }
@@ -224,6 +230,8 @@ main.lp-grid {
               display: flex;
               align-items: center;
               justify-content: center;
+              padding: 0;
+              border: 0;
             }
           }
 

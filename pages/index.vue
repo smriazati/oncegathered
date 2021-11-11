@@ -4,16 +4,17 @@
       <header>
         <div class="logo">
           <figure v-if="isMobile">
-            <img
+            <!-- <img
               :src="`${$urlFor(siteSettings.siteSecondaryLogo.url)
                 .forceDownload(siteSettings.siteSecondaryLogo.originalFilename)
                 .size(parseInt(windowWidth * 0.9))}`"
               :alt="siteSettings.siteSecondaryLogo.alt"
               :width="parseInt(windowWidth * 0.9)"
-            />
+            /> -->
+            <LogoLottie :key="isMobile" path="/lottie/stackedlogo/data.json" />
           </figure>
           <figure v-else>
-            <LogoLottie path="/lottie/logo/data.json" />
+            <LogoLottie :key="isMobile" path="/lottie/logo/data.json" />
           </figure>
         </div>
         <h1 v-if="siteSettings.siteTitle" class="visually-hidden">
@@ -35,8 +36,7 @@
           <li @mouseover="setHoverClass(0)" @mouseout="removeHoverClass(0)">
             <a
               v-if="siteSettings.siteEmail"
-              :href="`:mailto
-              =${siteSettings.siteEmail}`"
+              :href="`mailto:${siteSettings.siteEmail}`"
             >
               <span v-if="page.email_link_text">{{
                 page.email_link_text
@@ -47,18 +47,19 @@
           <li @mouseover="setHoverClass(1)" @mouseout="removeHoverClass(1)">
             <a
               v-if="siteSettings.instagram"
+              target="_blank"
               :href="`https://www.instagram.com/{siteSettings.instagram }`"
             >
               <span v-if="page.ig_link_text">{{ page.ig_link_text }}</span>
-              <span v-else href="">Follow on Instagram</span>
+              <span v-else>Follow on Instagram</span>
             </a>
           </li>
           <li
             @mouseover="setHoverClass(2)"
             @mouseout="removeHoverClass(2)"
-            :style="`height: ${columnWidth}`"
+            :style="`height: ${columnWidth}px`"
           >
-            <a href=""
+            <a href="" target="_blank"
               ><span>
                 <span v-if="page.pdf_link_text">{{ page.pdf_link_text }}</span>
                 <span v-else href="">Learn more</span> </span
@@ -141,6 +142,7 @@ export default {
     return {
       hoverClasses: ["emailHover", "followHover", "learnHover"],
       windowWidth: undefined,
+      windowHeight: undefined,
       isMenuExpanded: false,
       logoDesktopMargin: 0,
     };
@@ -167,12 +169,6 @@ export default {
         return parseInt(this.windowWidth * 0.9);
       }
     },
-    windowHeight() {
-      if (!process.client) {
-        return;
-      }
-      return `${window.innerHeight}`;
-    },
     isMobile() {
       if (!process.client) {
         return;
@@ -187,22 +183,24 @@ export default {
       if (!process.client) {
         return;
       }
-      let colWidth, gridWidth;
+      let colWidth = 0;
+      let gridWidth = 0;
       if (this.windowWidth > 1388) {
-        // big screen
-        gridWidth = 1388;
+        colWidth = 153;
       } else {
         //
         gridWidth = this.windowWidth * 1;
+        colWidth = parseInt((gridWidth - 16 * 7) / 8);
       }
-      colWidth = `${parseInt((gridWidth - 16 * 7) / 8)}px`;
       return colWidth;
     },
   },
   mounted() {
     this.windowWidth = window.innerWidth;
+    this.windowHeight = window.innerHeight;
     window.addEventListener("resize", () => {
       this.windowWidth = window.innerWidth;
+      this.windowHeight = window.innerHeight;
     });
   },
   methods: {
