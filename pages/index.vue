@@ -72,6 +72,24 @@
               </span>
             </a>
           </li>
+          <li
+            v-else
+            @mouseover="setHoverClass(2)"
+            @mouseout="removeHoverClass(2)"
+            :style="`height: ${columnWidth}px`"
+          >
+            <a href="" target="_blank"
+              ><span>
+                <span v-if="page.pdf_link_text">{{ page.pdf_link_text }}</span>
+                <span v-else>Learn more</span> </span
+              ><span class="show-on-mobile">
+                <span v-if="page.pdf_mobile_link_text">{{
+                  page.pdf_mobile_link_text
+                }}</span>
+                <span v-else>Download our Investment Guide</span>
+              </span>
+            </a>
+          </li>
         </ul>
       </nav>
       <footer>
