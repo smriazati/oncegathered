@@ -55,19 +55,20 @@
             </a>
           </li>
           <li
+            v-if="page.pdf"
             @mouseover="setHoverClass(2)"
             @mouseout="removeHoverClass(2)"
             :style="`height: ${columnWidth}px`"
           >
-            <a href="" target="_blank"
+            <a :href="`${page.pdf.url}?dl=${page.pdf.original}`" target="_blank"
               ><span>
                 <span v-if="page.pdf_link_text">{{ page.pdf_link_text }}</span>
-                <span v-else href="">Learn more</span> </span
+                <span v-else>Learn more</span> </span
               ><span class="show-on-mobile">
                 <span v-if="page.pdf_mobile_link_text">{{
                   page.pdf_mobile_link_text
                 }}</span>
-                <span v-else href="">Download our Investment Guide</span>
+                <span v-else>Download our Investment Guide</span>
               </span>
             </a>
           </li>
@@ -96,8 +97,9 @@ const pageQuery = groq`*[_type == "landingPage"]{
       pdf_link_text,
       pdf_mobile_link_text,
       "pdf": {
-        "url": pdf->url,
-        "originalFilename": pdf->originalFilename
+        "asset": pdf.asset,
+        "url": pdf.asset->url,
+        "original": pdf.asset->originalFilename
       }
     }`;
 const siteSettingsQuery = groq`*[_type == "siteSettings"]{
@@ -189,8 +191,12 @@ export default {
         colWidth = 153;
       } else {
         //
-        gridWidth = this.windowWidth * 1;
-        colWidth = parseInt((gridWidth - 16 * 7) / 8);
+        if (this.windowHeight > 600) {
+          gridWidth = this.windowWidth * 1;
+          colWidth = parseInt((gridWidth - 16 * 7) / 8);
+        } else {
+          colWidth = 136;
+        }
       }
       return colWidth;
     },

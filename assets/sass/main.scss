@@ -295,6 +295,10 @@ main.lp-grid {
       }
 
       &.expanded {
+        @media (max-height: 600px) {
+          overflow: scroll;
+        }
+
         position: fixed;
         height: 100%;
 
@@ -327,6 +331,12 @@ main.lp-grid {
           li {
             font-size: 98px;
             line-height: 90px;
+
+            @media (max-width: 800px) {
+              font-size: 75px;
+              line-height: 68px;
+            }
+
             text-align: center;
             align-items: center;
             flex: 1;
