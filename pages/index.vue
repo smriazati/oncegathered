@@ -78,7 +78,6 @@
             @mouseout="removeHoverClass(2)"
             :style="`height: ${columnWidth}px`"
           >
-            <a href="" target="_blank"
               ><span>
                 <span v-if="page.pdf_link_text">{{ page.pdf_link_text }}</span>
                 <span v-else>Learn more</span> </span
