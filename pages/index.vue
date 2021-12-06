@@ -41,14 +41,14 @@
               <span v-if="page.email_link_text">{{
                 page.email_link_text
               }}</span>
-              <span v-else href="">Email to inquire</span>
+              <span v-else>Email to inquire</span>
             </a>
           </li>
           <li @mouseover="setHoverClass(1)" @mouseout="removeHoverClass(1)">
             <a
               v-if="siteSettings.instagram"
               target="_blank"
-              :href="`https://www.instagram.com/{siteSettings.instagram }`"
+              :href="`https://www.instagram.com/${siteSettings.instagram }`"
             >
               <span v-if="page.ig_link_text">{{ page.ig_link_text }}</span>
               <span v-else>Follow on Instagram</span>
