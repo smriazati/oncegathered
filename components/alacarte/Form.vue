@@ -163,6 +163,11 @@ export default {
       required: true,
     },
   },
+  head() {
+    return {
+      title: "A La Carte Orders",
+    };
+  },
   data() {
     return {
       errorMsg: "Fill out all required fields",

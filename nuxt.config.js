@@ -1,4 +1,17 @@
-export default {
+import { groq } from "@nuxtjs/sanity";
+import { sanity } from './plugins/sanity'
+const query = groq`*[_type == "siteSettings"][0]{
+  "favicon": favicon.asset->url,
+  siteDesc,
+  "ogImg": {
+       "url": ogImg.asset->url,
+       "alt": ogImg.asset->altText
+   }
+}`;
+
+export default async() => {
+  const siteSettings = await sanity.fetch(query)
+  return {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
@@ -12,13 +25,27 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content:`${siteSettings?.siteDesc}` },
       { name: 'format-detection', content: 'telephone=no' },
       {
         hid: 'og:image',
         property: 'og:image',
-        content: '/ogImg.png'
-      }
+        content: `${siteSettings?.ogImg?.url}?h=1200&w=640`
+      },
+      {
+        hid: 'og:image:width',
+        property: 'og:image:width',
+        content: `640`
+      },
+      {
+        hid: 'og:image:height',
+        property: 'og:image:height',
+        content: `1200`
+      },
+      { hid: 'og:image:alt', property: 'og:image:alt',  content: `${siteSettings?.ogImg?.alt}`}
+    ],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: `${siteSettings?.favicon}?h=1200&w=640` },
     ],
     script: [
       {
@@ -39,7 +66,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    "~/plugins/sanityImage.js"
+    "~/plugins/sanityImage.js", "~/plugins/sanity.js"
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -78,4 +105,5 @@ export default {
       limit: 0,
     }
   }, 
+}
 }
