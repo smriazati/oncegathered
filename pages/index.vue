@@ -48,7 +48,7 @@
             <a
               v-if="siteSettings.instagram"
               target="_blank"
-              :href="`https://www.instagram.com/${siteSettings.instagram }`"
+              :href="`https://www.instagram.com/${siteSettings.instagram}`"
             >
               <span v-if="page.ig_link_text">{{ page.ig_link_text }}</span>
               <span v-else>Follow on Instagram</span>
@@ -78,16 +78,15 @@
             @mouseout="removeHoverClass(2)"
             :style="`height: ${columnWidth}px`"
           >
-              ><span>
-                <span v-if="page.pdf_link_text">{{ page.pdf_link_text }}</span>
-                <span v-else>Learn more</span> </span
-              ><span class="show-on-mobile">
-                <span v-if="page.pdf_mobile_link_text">{{
-                  page.pdf_mobile_link_text
-                }}</span>
-                <span v-else>Download our Investment Guide</span>
-              </span>
-            </a>
+            ><span>
+              <span v-if="page.pdf_link_text">{{ page.pdf_link_text }}</span>
+              <span v-else>Learn more</span> </span
+            ><span class="show-on-mobile">
+              <span v-if="page.pdf_mobile_link_text">{{
+                page.pdf_mobile_link_text
+              }}</span>
+              <span v-else>Download our Investment Guide</span>
+            </span>
           </li>
         </ul>
       </nav>

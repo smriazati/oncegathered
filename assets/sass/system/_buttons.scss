@@ -1,0 +1,101 @@
+$btnTransition: .25s ease-in all;
+
+@mixin btnPrimaryStyle() {
+  // parent element is a or button 
+  display: inline-block;
+  padding: .75rem;
+  border-radius: 6px;
+  padding: 12px 18px;
+
+  @media (max-width: 960px) {
+    padding: 8px 24px;
+  }
+
+  background: #A5B3EA; // periwinkle
+  border: 1px solid transparent;
+  transition: $btnTransition;
+  display: inline-flex;
+  align-items: center;
+
+  >span {
+    font-family: Romie, serif; // ideally this uses the mixin
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: center;
+  }
+
+  &:focus {
+    border: 1px solid #000;
+  }
+
+  &:hover:not(:disabled) {
+    background: transparent;
+    border: 1px solid #A5B3EA;
+  }
+}
+
+@mixin btnOutlineStyle() {
+  display: inline-block;
+  padding: .75rem;
+  border-radius: 6px;
+  padding: 12px 18px;
+  background: transparent;
+  border: 1px solid #3E2A39;
+  transition: $btnTransition;
+  display: inline-flex;
+  align-items: center;
+
+  >span {
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+  }
+
+  &:focus {
+    border: 2px solid #3E2A39;
+  }
+
+  &:hover {
+    background: #A5B3EA;
+  }
+}
+
+@mixin btnTextStyle() {
+  border-bottom: 1px solid #3E2A39;
+  border-radius: 0;
+  transition: $btnTransition;
+  padding-bottom: 0.25rem;
+
+  >span {
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+  }
+
+  &:focus {
+    border-radius: 6px;
+    border: 2px solid #3E2A39;
+  }
+
+  &:hover {
+    >span {
+      font-size: 20px;
+    }
+  }
+}
+
+
+@mixin inputStyle() {
+  background: #F3F1EF;
+}

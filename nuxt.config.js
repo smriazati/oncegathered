@@ -5,7 +5,7 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: "%s | Once Gathered",
-    title: 'Otherlove',
+    title: 'Once Gathered',
     htmlAttrs: {
       lang: 'en'
     },
@@ -46,7 +46,16 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ['@nuxtjs/sanity/module', '@nuxtjs/google-fonts'],
+  buildModules: ['@nuxtjs/sanity/module', '@nuxtjs/google-fonts', '@nuxtjs/style-resources'],
+  styleResources: {
+      scss: [
+          '~/assets/sass/system/_colors.scss',
+          '~/assets/sass/system/_typography.scss',
+          '~/assets/sass/system/_layout.scss',
+          '~/assets/sass/system/_buttons.scss'
+      ],
+      hoistUseStatements: true  
+  },
   googleFonts: {
     families: {
       'Cormorant Garamond': {
@@ -64,5 +73,9 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+      extractCSS: true,
+      loaders: {
+      limit: 0,
+    }
+  }, 
 }

@@ -18,7 +18,10 @@
     "lottie-web": "^5.8.1",
     "nuxt": "^2.15.7",
     "sass": "^1.29.0",
-    "sass-loader": "^10.1.0",
+    "sass-loader": "^10.1.1",
     "vue-lottie": "^0.2.1"
+  },
+  "devDependencies": {
+    "@nuxtjs/style-resources": "^1.2.1"
   }
 }
