@@ -56,6 +56,37 @@ a {
   text-decoration: none;
 }
 
+
+/* typography */
+
+/* typography */
+html {
+  font-size: 16px;
+}
+
+h1,
+.h1 {
+  @include h1Style();
+}
+
+h2,
+.h2 {
+  @include h2Style();
+}
+
+h3,
+.h3 {
+  @include h3Style();
+}
+
+p,
+.p,
+ul,
+ol {
+  @include pStyle();
+}
+
+
 nav ul {
   @media (min-width: $mobile-bp) {
     display: flex;
@@ -131,8 +162,9 @@ main.lp-grid {
     }
   }
 
-  nav {
-    font-family: "Cormorant Garamond", Arial, Helvetica, sans-serif;
+  nav p,
+  nav ul {
+    font-family: "Cormorant Garamond", Arial, Helvetica, sans-serif !important;
     font-style: italic;
     font-weight: 300;
     font-size: 32px;
@@ -472,35 +504,6 @@ main.lp-grid {
   }
 }
 
-
-/* typography */
-
-/* typography */
-html {
-  font-size: 16px;
-}
-
-h1,
-.h1 {
-  @include h1Style();
-}
-
-h2,
-.h2 {
-  @include h2Style();
-}
-
-h3,
-.h3 {
-  @include h3Style();
-}
-
-p,
-.p,
-ul,
-ol {
-  @include pStyle();
-}
 
 /* layout */
 
