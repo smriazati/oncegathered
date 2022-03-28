@@ -1,10 +1,10 @@
 <template>
   <div class="alaCartePage">
-    <FixedHeader />
-    <PageIntro :schemaType="schemaType" />
+    <siteFixedHeader />
+    <pageIntro :schemaType="schemaType" />
     <section>
       <h2 class="purple-banner-title">Items We Offer</h2>
-      <Offerings />
+      <alacarteOfferings />
     </section>
     <section>
       <h2 class="purple-banner-title">A La Carte Order Form</h2>

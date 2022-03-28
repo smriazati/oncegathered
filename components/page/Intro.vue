@@ -6,6 +6,8 @@
           <img :src="content.img.url" :alt="content.img.alt" />
         </figure>
       </div>
+
+      <!-- A LA CARTE TEXT WRAPPER -->
       <div v-if="schemaType == 'alaCartePage'" class="flex-col text-wrapper">
         <h1>A La Carte Orders</h1>
         <ol>
@@ -64,8 +66,15 @@ export default {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
 
+    @media (max-width: $collapse-bp) {
+      display: flex;
+      flex-direction: column;
+    }
     .image-wrapper {
       overflow: hidden;
+      @media (max-width: $collapse-bp) {
+        min-height: 550px;
+      }
       figure {
         width: 100%;
         height: 100%;
@@ -82,7 +91,7 @@ export default {
 
   &.alaCartePage {
     .text-wrapper {
-      padding: 0 60px;
+      padding: 120px 60px;
       justify-content: center;
       > *:not(:last-child) {
         padding-bottom: 60px;

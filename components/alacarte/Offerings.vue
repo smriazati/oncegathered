@@ -45,38 +45,57 @@ export default {
     @include baseContainer;
   }
   .content-item {
-    display: grid;
-    grid-template: 1fr / 1fr;
-    justify-items: center;
     margin: 80px 0;
-    > * {
-      grid-column: 1 / 1;
-      grid-row: 1 / 1;
-    }
-    .image-wrapper {
-      margin-top: -5%;
-      opacity: 0;
-      transition: 0.3s ease opacity;
-      figure {
-        height: 0;
+
+    @media (min-width: $collapse-bp) {
+      display: grid;
+      grid-template: 1fr / 1fr;
+      justify-items: center;
+      > * {
+        grid-column: 1 / 1;
+        grid-row: 1 / 1;
+      }
+      .image-wrapper {
+        margin-top: -5%;
+        opacity: 0;
+        transition: 0.3s ease opacity;
+        figure {
+          height: 0;
+        }
+      }
+
+      &:nth-child(odd) {
+        .image-wrapper {
+          justify-self: end;
+        }
+      }
+
+      &:nth-child(even) {
+        .image-wrapper {
+          justify-self: start;
+        }
+      }
+
+      &:hover {
+        .image-wrapper {
+          opacity: 1;
+        }
       }
     }
 
-    &:nth-child(even) {
-      .image-wrapper {
-        justify-self: end;
+    @media (max-width: $collapse-bp) {
+      display: flex;
+      flex-direction: column-reverse;
+      justify-content: center;
+      &:not(:last-child) {
+        margin-bottom: 60px;
       }
-    }
-
-    &:nth-child(odd) {
-      .image-wrapper {
-        justify-self: start;
+      .text-wrapper {
+        margin-bottom: 1rem;
       }
-    }
-
-    &:hover {
       .image-wrapper {
-        opacity: 1;
+        display: flex;
+        justify-content: center;
       }
     }
 
