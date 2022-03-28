@@ -530,6 +530,7 @@ button.disabled {
 }
 
 
+
 label {
   @include labelStyle;
 }
@@ -537,6 +538,7 @@ label {
 input,
 textarea {
   @include inputStyle;
+  @include bodyTypeface;
 }
 
 textarea {

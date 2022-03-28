@@ -6,7 +6,6 @@
     :action="successRoute"
     enctype="application/x-www-form-urlencoded"
     class="alacarte"
-    :class="hasError ? 'has-error' : 'no-error'"
   >
     <input type="hidden" name="form-name" value="alacarte" />
     <div class="form-wrapper">
@@ -49,6 +48,7 @@
           v-model="person1nameInput"
           required
         />
+        <div v-if="person1nameError" class="error">{{ errorMsg }}</div>
       </div>
       <div class="form-group">
         <label for="person1pronouns">Person 1 Pronouns</label>
@@ -66,6 +66,7 @@
           v-model="person2nameInput"
           required
         />
+        <div v-if="person2nameError" class="error">{{ errorMsg }}</div>
       </div>
       <div class="form-group">
         <label for="person2pronouns">Person 2 Pronouns</label>
@@ -79,21 +80,25 @@
       <div class="form-group flex-col full-on-sm-screen">
         <label for="email">Email Address *</label>
         <input type="text" name="email" v-model="emailInput" required />
+        <div v-if="emailError" class="error">{{ errorMsg }}</div>
       </div>
 
       <div class="form-group flex-col full-on-sm-screen">
         <label for="phone">Phone Number *</label>
         <input type="text" name="phone" v-model="phoneInput" required />
+        <div v-if="phoneError" class="error">{{ errorMsg }}</div>
       </div>
 
       <div class="form-group flex-col">
         <label for="date">Wedding Date *</label>
         <input type="date" name="date" v-model="dateInput" required />
+        <div v-if="dateError" class="error">{{ errorMsg }}</div>
       </div>
 
       <div class="form-group flex-col">
         <label for="location">Wedding Location *</label>
         <input type="text" name="location" v-model="locationInput" required />
+        <div v-if="locationError" class="error">{{ errorMsg }}</div>
       </div>
 
       <div class="form-group flex-col">
@@ -160,14 +165,24 @@ export default {
   },
   data() {
     return {
-      emailInput: null,
+      errorMsg: "Fill out all required fields",
+
       person1nameInput: null,
-      person1pronounsInput: null,
       person2nameInput: null,
-      person2pronounsInput: null,
+      emailInput: null,
       phoneInput: null,
       dateInput: null,
       locationInput: null,
+
+      person1nameError: false,
+      person2nameError: false,
+      emailError: false,
+      phoneError: false,
+      dateError: false,
+      locationError: false,
+
+      person1pronounsInput: null,
+      person2pronounsInput: null,
       plannerInput: null,
       colorsInput: null,
       styleInput: null,
@@ -175,36 +190,52 @@ export default {
       pinterestInput: null,
       referralInput: null,
       notesInput: null,
-      hasError: false,
       errors: [],
     };
   },
   methods: {
-    checkForm(e) {
+    clearErrors() {
       this.errors = [];
-
+      this.person1nameError = false;
+      this.person2nameError = false;
+      this.emailError = false;
+      this.phoneError = false;
+      this.dateError = false;
+      this.locationError = false;
+    },
+    checkForm(e) {
+      this.clearErrors();
       if (!this.person1nameInput) {
+        this.person1nameError = true;
         this.errors.push("Person 1 name required.");
       }
       if (!this.person2nameInput) {
+        this.person2nameError = true;
+
         this.errors.push("Person 2 name required.");
       }
 
       if (!this.emailInput) {
+        this.emailError = true;
         this.errors.push("Email address required.");
       } else if (!this.validateEmail(this.emailInput)) {
+        this.emailError = true;
         this.errors.push("Valid email address required.");
       }
 
       if (!this.phoneInput) {
+        this.phoneError = true;
+
         this.errors.push("Phone number required.");
       }
 
       if (!this.dateInput) {
+        this.dateError = true;
         this.errors.push("Wedding date required.");
       }
 
       if (!this.locationInput) {
+        this.locationError = true;
         this.errors.push("Wedding location required.");
       }
 
@@ -253,6 +284,15 @@ form.alacarte {
             padding-right: 0;
           }
         }
+      }
+
+      .error {
+        margin-top: 8px;
+        font-size: 12px;
+        font-style: italic;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: 0em;
       }
     }
   }
