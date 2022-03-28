@@ -73,7 +73,7 @@ export default {
     .image-wrapper {
       overflow: hidden;
       @media (max-width: $collapse-bp) {
-        min-height: 550px;
+        min-height: 100vw;
       }
       figure {
         width: 100%;

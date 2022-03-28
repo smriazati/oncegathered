@@ -277,6 +277,10 @@ form.alacarte {
       }
       &:not(.full-width) {
         flex: 0 0 50%;
+        @media (max-width: 400px) and (orientation: portrait) {
+          flex: 100%;
+          padding-right: 0;
+        }
       }
       &.full-width {
         flex: 100%;
