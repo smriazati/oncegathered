@@ -102,7 +102,7 @@ export default {
     .text-wrapper {
       text-align: center;
       .title {
-        font-family: Queens Trial;
+        @include displayTypeface;
         font-size: 48px;
         font-style: italic;
         font-weight: 300;

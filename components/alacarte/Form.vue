@@ -139,8 +139,8 @@
       </div>
 
       <!-- // submit -->
-      <div class="form-group full-width" @click="checkForm">
-        <button class="btn primary" type="submit">
+      <div class="form-group full-width">
+        <button class="btn primary" type="submit" @click="checkForm">
           <span>Send</span>
         </button>
       </div>
@@ -302,6 +302,7 @@ form.alacarte {
         font-weight: 400;
         line-height: 20px;
         letter-spacing: 0em;
+        @include bodyTypeface;
       }
     }
   }
@@ -309,6 +310,7 @@ form.alacarte {
   button {
     display: flex;
     justify-content: flex-start;
+    align-self: flex-start;
     span {
       background: $forest;
       @include bodyTypeface;
@@ -319,6 +321,12 @@ form.alacarte {
       letter-spacing: 0em;
       color: $buttercream;
       padding: 8px 16px;
+      transition: 0.3s ease all;
+
+      &:hover {
+        background: $coral;
+        color: $buttercream;
+      }
     }
 
     &:disabled {

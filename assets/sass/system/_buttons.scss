@@ -22,4 +22,8 @@ $btnTransition: .25s ease-in all;
   outline: 0;
   border: 1px solid $charcoal;
   padding: 8px;
+
+  &:focus {
+    border-color: $lavender;
+  }
 }
