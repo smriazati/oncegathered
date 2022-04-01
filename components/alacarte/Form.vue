@@ -128,9 +128,27 @@
         <label for="pinterest">URL For Pinterest Board If Applicable</label>
         <input type="text" name="pinterest" v-model="pinterestInput" />
       </div>
+
       <div class="form-group flex-col full-on-sm-screen">
         <label for="referral">How Did You Hear About Us?</label>
         <input type="text" name="referral" v-model="referralInput" />
+      </div>
+
+      <div class="form-group flex-col full-width">
+        <p>
+          List specific flowers needs for your wedding and approximate number of
+          each
+        </p>
+        <div class="product-list">
+          <div
+            v-for="(item, index) in productList"
+            :key="index"
+            class="product-list-item"
+          >
+            <label :for="item">{{ item }} </label>
+            <input type="number" :name="item" min="0" />
+          </div>
+        </div>
       </div>
 
       <div class="form-group flex-col full-width full-on-sm-screen">
@@ -196,6 +214,24 @@ export default {
       referralInput: null,
       notesInput: null,
       errors: [],
+
+      productList: [
+        "Bride Bouquet",
+        "Bridesmaid Bouquet",
+        "Posy Style Bouquet",
+        "Boutonniere",
+        "Corsage",
+        "Flower Comb",
+        "Flower Crown ",
+        "Modest and Petite Low and Lush",
+        "Perfect Size Low and Lush",
+        "Lavish Lush and Lush",
+        "Bar/Welcome arrangement (Tall skinny vase)",
+        "Rectangle Arrangement (perfect for long table)",
+        "Garland",
+        "Bud vases",
+        "Petals for Aisle",
+      ],
     };
   },
   methods: {
@@ -347,6 +383,27 @@ form.alacarte {
     line-height: 18px;
     letter-spacing: 0em;
     margin-bottom: 0.8rem;
+  }
+
+  p {
+    @include labelStyle;
+  }
+  .product-list-item {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    margin-top: 15px;
+
+    input {
+      flex: 0 0 48px;
+      width: 48px;
+      min-width: unset;
+    }
+    label {
+      flex: 2;
+      padding-left: 1rem;
+      margin: 0;
+    }
   }
 }
 </style>

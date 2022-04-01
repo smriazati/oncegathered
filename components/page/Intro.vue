@@ -13,7 +13,6 @@
         <ol>
           <li>Answer questions below.</li>
           <li>List which items you would like to order.</li>
-          <li>Upload 2-3 photos of inspiration.</li>
           <li>
             Please list if you ever need any extra greenery or other items if
             you are a planner.
