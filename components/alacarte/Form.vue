@@ -154,7 +154,12 @@
       <div class="form-group full-width file-upload">
         <label for="inspiration" class="custom-file-upload">
           Upload 2-3 photos of inspiration below
-          <input id="inspiration" type="file" v-on:change="handleAttachment" />
+          <input
+            id="inspiration"
+            name="inspiration"
+            type="file"
+            v-on:change="handleAttachment"
+          />
         </label>
         <p class="small">Limit of one file, max 8mb</p>
       </div>
