@@ -5,7 +5,6 @@
     data-netlify="true"
     :action="successRoute"
     class="alacarte"
-    enctype="multipart-form/data"
   >
     <input type="hidden" name="form-name" value="alacarte" />
     <div class="form-wrapper">
@@ -158,6 +157,7 @@
             id="inspiration"
             name="inspiration"
             type="file"
+            accept=".pdf,image/*"
             v-on:change="handleAttachment"
           />
         </label>
