@@ -152,17 +152,10 @@
       </div>
 
       <div class="form-group full-width file-upload">
-        <!-- <label>
-          <span
-            >Upload 2-3 photos of inspiration below (limit of one file, max
-            8mb)</span
-          >
-          <input name="file" type="file" />
-        </label> -->
-        <label for="file-upload" class="custom-file-upload">
+        <label for="inspiration" class="custom-file-upload">
           Upload 2-3 photos of inspiration below
+          <input id="inspiration" type="file" v-on:change="handleAttachment" />
         </label>
-        <input id="file-upload" type="file" />
         <p class="small">Limit of one file, max 8mb</p>
       </div>
 
@@ -229,7 +222,7 @@ export default {
       referralInput: null,
       notesInput: null,
       errors: [],
-
+      fileAttachment: "",
       productList: [
         "Bride Bouquet",
         "Bridesmaid Bouquet",
@@ -250,6 +243,9 @@ export default {
     };
   },
   methods: {
+    handleAttachment(e) {
+      this.fileAttachment = e.target.files[0];
+    },
     clearErrors() {
       this.errors = [];
       this.person1nameError = false;
@@ -427,6 +423,9 @@ form.alacarte {
       align-self: start;
       border: 0;
       padding-left: 0;
+    }
+    label {
+      margin-bottom: 0;
     }
     p.small {
       font-size: 12px;
