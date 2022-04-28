@@ -4,8 +4,8 @@
     method="POST"
     data-netlify="true"
     :action="successRoute"
-    enctype="application/x-www-form-urlencoded"
     class="alacarte"
+    enctype="multipart-form/data"
   >
     <input type="hidden" name="form-name" value="alacarte" />
     <div class="form-wrapper">
@@ -149,6 +149,22 @@
             <input type="number" :name="item" min="0" />
           </div>
         </div>
+      </div>
+
+      <div class="form-group full-width file-upload">
+        <!-- <label>
+          <span
+            >Upload 2-3 photos of inspiration below (limit of one file, max
+            8mb)</span
+          >
+          <input name="file" type="file" />
+        </label> -->
+        <p>Upload 2-3 photos of inspiration below</p>
+        <label for="file-upload" class="custom-file-upload">
+          Upload a file
+        </label>
+        <input id="file-upload" type="file" />
+        <p class="small">Limit of one file, max 8mb</p>
       </div>
 
       <div class="form-group flex-col full-width full-on-sm-screen">
@@ -403,6 +419,24 @@ form.alacarte {
       flex: 2;
       padding-left: 1rem;
       margin: 0;
+    }
+  }
+
+  // file upload
+  .file-upload {
+    input[type="file"] {
+      display: none;
+    }
+    .custom-file-upload {
+      border: 1px solid #000;
+      display: inline-block;
+      padding: 6px 12px;
+      cursor: pointer;
+      width: unset;
+      align-self: start;
+    }
+    p.small {
+      font-size: 12px;
     }
   }
 }
