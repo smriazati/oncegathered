@@ -159,9 +159,8 @@
           >
           <input name="file" type="file" />
         </label> -->
-        <p>Upload 2-3 photos of inspiration below</p>
         <label for="file-upload" class="custom-file-upload">
-          Upload a file
+          Upload 2-3 photos of inspiration below
         </label>
         <input id="file-upload" type="file" />
         <p class="small">Limit of one file, max 8mb</p>
@@ -425,15 +424,9 @@ form.alacarte {
   // file upload
   .file-upload {
     input[type="file"] {
-      display: none;
-    }
-    .custom-file-upload {
-      border: 1px solid #000;
-      display: inline-block;
-      padding: 6px 12px;
-      cursor: pointer;
-      width: unset;
       align-self: start;
+      border: 0;
+      padding-left: 0;
     }
     p.small {
       font-size: 12px;
