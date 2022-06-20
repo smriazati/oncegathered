@@ -1,5 +1,7 @@
 <template>
-  <header class="fixed-header"><SiteLogo :width="300" /></header>
+  <header class="fixed-header">
+    <nuxt-link to="/"><SiteLogo :width="300" /></nuxt-link>
+  </header>
 </template>
 
 <style lang="scss">

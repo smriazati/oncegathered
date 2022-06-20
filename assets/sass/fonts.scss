@@ -16,3 +16,17 @@
   src: url('../fonts/hkgrotesk/HKGrotesk-Regular.woff2') format('woff2'),
     url('../fonts/hkgrotesk/HKGrotesk-Regular.woff') format('woff');
 }
+
+@font-face {
+  font-family: 'Queens';
+  src: url('../fonts/queens/Queens_W-Light.woff2') format('woff2'),
+    url('../fonts/queens/Queens_W-Light.woff') format('woff');
+}
+
+
+@font-face {
+  font-family: 'Queens';
+  font-style: italic;
+  src: url('../fonts/queens/Queens_W-LightItalic.woff2') format('woff2'),
+    url('../fonts/queens/Queens_W-LightItalic.woff') format('woff');
+}

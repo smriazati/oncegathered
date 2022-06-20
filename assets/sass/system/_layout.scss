@@ -7,20 +7,78 @@ $xl-spacer: 8rem;
 $xxl-spacer: 9rem;
 $xxxl-spacer: 12rem;
 
+$collapse-bp: 980px;
+$container-width: 1316px;
 
-$nav-bp: 1005px;
-$collapse-bp: 1005px;
-
-$small-bp: 640px;
-$xl-bp: 1300px;
-
-$container-width: $collapse-bp;
+$half-container-width: 658px;
 
 @mixin baseContainer() {
   max-width: $container-width;
   margin: 0 auto;
 
+  @media (max-width: $container-width) {
+    max-width: 95%;
+  }
+}
+
+@mixin baseGrid() {
+  @include baseContainer();
+  display: grid;
+  grid-auto-rows: auto;
+
+  @media (min-width: $collapse-bp) {
+    grid-template-columns: repeat(8, 1fr);
+    grid-column-gap: 30px;
+
+  }
+
   @media (max-width: $collapse-bp) {
-    max-width: 90%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 15px;
+  }
+}
+
+@mixin imageTextCols() {
+  @include baseGrid;
+
+  @media (min-width: $collapse-bp) {
+    padding: 150px 0;
+
+  }
+
+
+  @media (max-width: $collapse-bp) {
+    padding: 60px 0;
+  }
+
+  .image-wrapper {
+    place-self: center;
+
+    @media (min-width: $collapse-bp) {
+      grid-column: 6 / span 3;
+      padding-left: 25%;
+    }
+
+    @media (max-width: $collapse-bp) {
+      grid-column: 3 / span 2;
+
+      img {
+        height: auto;
+      }
+    }
+  }
+
+  .text-wrapper {
+    place-self: center;
+
+    @media (min-width: $collapse-bp) {
+      grid-column: 2 / span 4;
+    }
+
+    @media (max-width: $collapse-bp) {
+      grid-column: 1 / span 2;
+    }
+
+
   }
 }

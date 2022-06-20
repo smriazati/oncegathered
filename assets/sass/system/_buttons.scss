@@ -7,15 +7,68 @@ $btnTransition: .25s ease-in all;
   padding: 0;
   font-family: inherit;
   font-size: inherit;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 
-@mixin btnPrimaryStyle() {}
+@mixin btnSquare() {
+  @include resetBtn;
+  background: $deep-green;
+  color: $buttercream;
+  padding: 10px;
 
-@mixin btnOutlineStyle() {}
+  span {
+    @include sansSerifTypeface;
+    font-size: 16px;
+    line-height: 26px;
+  }
+}
 
-@mixin btnTextStyle() {}
+@mixin btnRound($bg, $hoverBg) {
+  @include resetBtn;
 
+  background: $bg;
+  transition: .3s ease all;
+  padding: 10px;
+  text-align: center;
+  border-radius: 50%;
+  height: 75px;
+  width: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background: $hoverBg;
+  }
+}
+
+@mixin btnRoundCoral() {
+  @include btnRound($coral, $coral);
+
+  span {
+    color: $charcoal;
+    @include serifTypeface;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 18px;
+    letter-spacing: 0.02em;
+  }
+}
+
+@mixin btnRoundMenu() {
+  @include btnRound($deep-green, $deep-green);
+
+  span {
+    color: $buttercream;
+    @include titleStyle();
+    text-transform: uppercase;
+  }
+}
 
 @mixin inputStyle() {
   border-radius: 0;

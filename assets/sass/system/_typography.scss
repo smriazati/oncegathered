@@ -1,20 +1,88 @@
+// typeface
+@mixin serifTypeface() {
+  font-family: 'Queens', serif;
+  font-style: normal;
+  font-weight: 300;
+}
+
+@mixin sansSerifTypeface() {
+  font-family: HK Grotesk, sans-serif;
+  font-weight: 400;
+}
+
 @mixin displayTypeface() {
-  font-family: Cormorant Garamond, sans-serif;
+  @include serifTypeface();
 }
 
 @mixin bodyTypeface() {
-  font-family: HK Grotesk, sans-serif;
+  @include sansSerifTypeface();
 }
 
-@mixin h1Style() {
-  //styleName: H1;
-  @include displayTypeface();
-  font-size: 48px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: 42px;
-  letter-spacing: 0em;
+// sizing
 
+@mixin displayStyle() {
+  @include serifTypeface();
+  font-style: italic;
+  font-size: 48px;
+  line-height: 58px;
+  letter-spacing: 0em;
+}
+
+@mixin displaySmStyle() {
+  @include serifTypeface();
+  font-style: italic;
+  font-size: 36px;
+  line-height: 50px;
+  letter-spacing: 0em;
+}
+
+@mixin headingStyle() {
+  @include serifTypeface();
+  font-size: 48px;
+  line-height: 58px;
+  letter-spacing: 0em;
+}
+
+@mixin titleStyle() {
+  @include sansSerifTypeface();
+  font-size: 15px;
+  line-height: 25px;
+  letter-spacing: 0.04em;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+@mixin largeTextStyle() {
+  @include sansSerifTypeface();
+  font-size: 20px;
+  line-height: 35px;
+}
+
+@mixin textStyle() {
+  @include sansSerifTypeface();
+  font-size: 16px;
+  line-height: 26px;
+}
+
+@mixin smallTextStyle() {
+  @include sansSerifTypeface();
+  font-size: 14px;
+  line-height: 24px;
+}
+
+@mixin captionStyle() {
+  @include serifTypeface();
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 20px;
+  letter-spacing: 0em;
+}
+
+// old - refactor
+
+@mixin h1Style() {
+  @include headingStyle();
 }
 
 @mixin h2Style() {
@@ -35,19 +103,8 @@
   letter-spacing: 0em;
 }
 
-// @mixin h4Style() {}
-
-// @mixin h5Style() {}
-
-// @mixin h6Style() {}
-
 @mixin pStyle() {
-  @include bodyTypeface();
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 26px;
-  letter-spacing: 0em;
+  @include textStyle()
 }
 
 @mixin detailStyle() {
@@ -60,19 +117,8 @@
   letter-spacing: 0m;
 }
 
-@mixin captionStyle() {
-  //styleName: Small;
-  @include displayTypeface();
-  font-size: 14px;
-  font-style: italic;
-  font-weight: 300;
-  line-height: 20px;
-  letter-spacing: 0em;
-}
-
-
 @mixin labelStyle() {
-  @include bodyTypeface;
+  @include sansSerifTypeface();
   font-size: 15px;
   font-style: normal;
   font-weight: 400;

@@ -1,16 +1,25 @@
 import { groq } from "@nuxtjs/sanity";
 import { sanity } from './plugins/sanity'
-const query = groq`*[_type == "siteSettings"][0]{
-  "favicon": favicon.asset->url,
-  siteDesc,
-  "ogImg": {
-       "url": ogImg.asset->url,
-       "alt": ogImg.asset->altText
-   }
-}`;
+const query = groq`*[_type in ["brand", "siteSettings"]]{
+  'brand': *[_type=='brand']{
+    "favicon": {
+        "url": favicon.image.asset->url,
+        "alt": favicon.image.asset->altText
+      }
+  }[0],
+  'siteSettings': *[_type=='siteSettings']{
+      siteDesc,
+      "ogImg": {
+        "url": ogImg.image.asset->url,
+        "alt": ogImg.image.asset->altText
+      }
+  }[0]
+}[0]`;
+
+const dynamicRouteQuery = groq`*[_type == "weddings"]{'slug':slug.current}`;
 
 export default async() => {
-  const siteSettings = await sanity.fetch(query)
+  const data = await sanity.fetch(query)
   return {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -25,12 +34,12 @@ export default async() => {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content:`${siteSettings?.siteDesc}` },
+      { hid: 'description', name: 'description', content:`${data?.siteSettings?.siteDesc}` },
       { name: 'format-detection', content: 'telephone=no' },
       {
         hid: 'og:image',
         property: 'og:image',
-        content: `${siteSettings?.ogImg?.url}?h=1200&w=640`
+        content: `${data?.siteSettings?.ogImg?.url}?h=1200&w=640`
       },
       {
         hid: 'og:image:width',
@@ -42,10 +51,10 @@ export default async() => {
         property: 'og:image:height',
         content: `1200`
       },
-      { hid: 'og:image:alt', property: 'og:image:alt',  content: `${siteSettings?.ogImg?.alt}`}
+      { hid: 'og:image:alt', property: 'og:image:alt',  content: `${data?.siteSettings?.ogImg?.alt}`}
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: `${siteSettings?.favicon}?h=1200&w=640` },
+      { rel: 'icon', type: 'image/x-icon', href: `${data?.brand?.favicon}?h=1200&w=640` },
     ],
     script: [
       {
@@ -97,7 +106,19 @@ export default async() => {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
   ],
-
+  generate: {
+    fallback: '404.html',
+    exclude: [/^\/new/],
+    // async routes() {
+    //   const weddings = (await sanity.fetch(dynamicRouteQuery)) || []
+    //   return weddings.map((wedding) => {
+    //     return {
+    //       route: `/weddings/${wedding.slug}/`,
+    //       payload: wedding,
+    //     }
+    //   })
+    // }
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
       extractCSS: true,

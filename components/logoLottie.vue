@@ -13,13 +13,17 @@ export default {
       type: String,
       required: true,
     },
+    forwardSpeed: {
+      type: Number,
+      required: true,
+    },
   },
   data() {
     return {
       direction: 1,
       anim: undefined,
       frameCount: 60,
-      forwardSpeed: 0.5,
+      // forwardSpeed: 0.5,
       reverseSpeed: 1,
       endHold: 5, // seconds
       debug: false,
@@ -58,7 +62,7 @@ export default {
       autoplay: false,
       path: this.path,
     });
-    this.anim.setSpeed(0.5);
+    this.anim.setSpeed(this.forwardSpeed);
     // this.anim.addEventListener("loopComplete", () => {
     //   this.onAnimLoop();
     // });

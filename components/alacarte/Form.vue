@@ -364,7 +364,7 @@ form.alacarte {
     justify-content: flex-start;
     align-self: flex-start;
     span {
-      background: $forest;
+      background: $deep-green;
       @include bodyTypeface;
       font-size: 18px;
       font-style: normal;

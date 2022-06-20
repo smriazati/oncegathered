@@ -2,8 +2,8 @@
   <span v-if="content">
     <figure>
       <img
-        :src="$urlFor(content.logo.url)"
-        :alt="content.logo.alt"
+        :src="$urlFor(content.submark.url)"
+        :alt="content.submark.alt"
         :width="width"
       />
     </figure>
@@ -14,9 +14,9 @@
 <script>
 import { groq } from "@nuxtjs/sanity";
 const query = groq`*[_type == "brand"]{
-    "logo": {
-     "url": siteLogo.image.asset->url,
-     "alt": siteLogo.image.asset->altText
+    "submark": {
+     "url": siteSubmark.image.asset->url,
+     "alt": siteSubmark.image.asset->altText
    } 
 }[0]`;
 export default {

@@ -24,6 +24,8 @@ export default {
   data: () => ({
     content: null,
   }),
+
+  layout: "alacarte",
 };
 </script>
 
