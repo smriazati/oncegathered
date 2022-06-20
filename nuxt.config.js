@@ -107,8 +107,11 @@ export default async() => {
   modules: [
   ],
   generate: {
-    fallback: '404.html',
-    exclude: [/^\/new/],
+    // fallback: '404.html',
+    fallback: false,
+    exclude: [
+      /^\/new/ // path starts with /admin
+    ],
     // async routes() {
     //   const weddings = (await sanity.fetch(dynamicRouteQuery)) || []
     //   return weddings.map((wedding) => {
