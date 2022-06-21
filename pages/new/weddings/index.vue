@@ -80,13 +80,18 @@ export default {
         return;
       }
       const slider = this.$refs.slider;
+      if (!slider) {
+        return;
+      }
       slider.scrollLeft += event.deltaY + event.deltaX;
 
       // this should change depending on content of slider...
       // console.log(slider.offsetWidth, slider.scrollLeft);
-      const offset = 100;
-      const sliderEnd = this.data.length * 100 + offset;
-      if (slider.scrollLeft < sliderEnd) {
+      const offset = this.data.weddings.length;
+      const sliderStart = slider.offsetTop;
+      const sliderEnd = this.data.weddings.length * 100 - offset;
+      // console.log(slider.scrollLeft, sliderEnd);
+      if (slider.scrollLeft < sliderEnd && slider.scrollLeft > sliderStart) {
         event.preventDefault();
       }
     },
@@ -102,14 +107,18 @@ export default {
   .weddings-slider {
     padding: 127px 0;
     overflow: hidden;
-    // position: relative;
+    @media (min-width: $collapse-bp) {
+      position: relative;
+    }
     .scroll-hint {
-      // position: absolute;
-      // right: 0;
-      // top: calc(50% - 37px - 16px);
       position: absolute;
       right: 0;
-      top: calc(50vh - 38px);
+      @media (min-width: $collapse-bp) {
+        top: calc(50% - 37px - 16px);
+      }
+      @media (max-width: $collapse-bp) {
+        top: calc(50vh - 38px);
+      }
     }
   }
 
@@ -164,6 +173,9 @@ export default {
           @media (min-width: $collapse-bp) {
             // opacity: 0;
             transition: 0.8s ease all;
+          }
+          p + p {
+            padding-right: 0.5ch; // offset for italic
           }
         }
       }

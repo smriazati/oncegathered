@@ -43,9 +43,7 @@
             For inquiries, please get in touch via the email below.
           </p>
           <p v-if="data.siteEmail" class="display-sm-style">
-            <a :href="`mailto:${data.siteEmail}`" class="link-inherit">{{
-              data.siteEmail
-            }}</a>
+            <a :href="`mailto:${data.siteEmail}`">{{ data.siteEmail }}</a>
           </p>
         </div>
       </div>
@@ -109,11 +107,11 @@ export default {
       const sections = Array.from(wrapper.children);
       sections.forEach((section) => {
         gsap.set(section, {
-          opacity: 0,
+          // opacity: 0,
           y: 100,
         });
         gsap.to(section, {
-          opacity: 1,
+          // opacity: 1,
           y: 0,
           scrollTrigger: {
             trigger: section,

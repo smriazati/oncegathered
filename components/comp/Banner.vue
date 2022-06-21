@@ -73,7 +73,7 @@ export default {
           // markers: true,
           start: "top top",
           end: () => {
-            return `"+=${window.innerHeight}"`;
+            return `"+=${window.innerHeight / 2 + window.innerHeight / 8}"`;
           },
           scrub: 1.1,
         },
@@ -90,7 +90,7 @@ export default {
   padding-top: 28px;
   padding-bottom: 164px;
   @media (min-width: $collapse-bp) {
-    min-height: 800px;
+    min-height: 478px;
   }
 
   @media (max-width: $collapse-bp) {

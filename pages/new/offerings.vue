@@ -108,40 +108,6 @@ export default {
 
 
 <style lang="scss">
-.page-intro-2 {
-  background: $buttercream;
-  .page-intro-wrapper {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto;
-    @media (min-width: $collapse-bp) {
-      min-height: 800px;
-      min-height: 80vh;
-    }
-    @media (max-width: $collapse-bp) {
-      display: flex;
-      flex-direction: column;
-    }
-    .image-wrapper {
-      overflow: hidden;
-      @media (max-width: $collapse-bp) {
-        min-height: 100vw;
-      }
-      figure {
-        width: 100%;
-        height: 100%;
-        img {
-          min-width: 100%;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center center;
-        }
-      }
-    }
-  }
-}
-
 .offerings-page {
   .offerings-page-wrapper {
     .offerings-list {

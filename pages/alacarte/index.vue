@@ -47,8 +47,8 @@ import { groq } from "@nuxtjs/sanity";
 
 const query = groq`*[_type == 'alaCartePage']{
           "img": {
-            "url": pageIntro.introImg.image.asset->url,
-            "alt": pageIntro.introImg.image.asset->altText
+            "url": img.image.asset->url,
+            "alt": img.image.asset->altText
         } 
 }[0]`;
 

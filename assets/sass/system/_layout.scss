@@ -82,3 +82,18 @@ $half-container-width: 658px;
 
   }
 }
+
+
+@mixin imageZoom() {
+  overflow: hidden;
+
+  img {
+    transform: scale(1);
+    transition: 1.1s cubic-bezier(0.53, 0.21, 0.6, 0.45) all;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+}

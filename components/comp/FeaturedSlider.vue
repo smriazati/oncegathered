@@ -46,6 +46,7 @@ export default {
 .featured-slider {
   padding: 210px 0;
   text-align: left;
+  overflow: hidden;
   .grid-wrapper {
     h2 {
       grid-row: 1 / 2;
@@ -71,6 +72,7 @@ export default {
     display: flex;
     .wedding-slider-item {
       margin-right: 10px;
+      @include imageZoom;
     }
   }
 }

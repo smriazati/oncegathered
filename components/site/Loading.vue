@@ -52,7 +52,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: 0.8s ease-out opacity, 2s 2s ease z-index;
+  transition: 0.5s ease-out opacity, 0.1s 0.5s ease z-index;
   &.show {
     opacity: 1;
     z-index: 301;
