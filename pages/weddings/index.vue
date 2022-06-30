@@ -171,7 +171,7 @@ export default {
           justify-content: space-between;
           margin-top: 12px;
           @media (min-width: $collapse-bp) {
-            // opacity: 0;
+            opacity: 0;
             transition: 0.8s ease all;
           }
           p + p {

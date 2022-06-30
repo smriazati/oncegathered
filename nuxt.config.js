@@ -54,7 +54,7 @@ export default async() => {
       { hid: 'og:image:alt', property: 'og:image:alt',  content: `${data?.siteSettings?.ogImg?.alt}`}
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: `${data?.brand?.favicon}?h=1200&w=640` },
+      { rel: 'icon', type: 'image/x-icon', href: `${data?.brand?.favicon.url}?h=1200&w=640` },
     ],
     script: [
       {
@@ -64,9 +64,6 @@ export default async() => {
         src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js"
       },
 
-    ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
     ]
   },
 

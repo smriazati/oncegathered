@@ -13,10 +13,14 @@
             </figure>
           </div>
           <div class="text-wrapper">
-            <div v-if="offeringsList">
+            <div v-if="offeringsList" class="text-wrapper-wrapper">
               <h1 class="title-style">Offerings</h1>
-              <ul>
-                <li v-for="(item, index) in offeringsList" :key="index">
+              <ul class="no-style">
+                <li
+                  v-for="(item, index) in offeringsList"
+                  :key="index"
+                  class="display-sm-style"
+                >
                   {{ item }}
                 </li>
               </ul>
@@ -24,35 +28,27 @@
           </div>
         </div>
       </div>
-      <div v-if="offerings" class="offerings-list">
-        <section
-          v-for="item in offerings"
-          :key="item._id"
-          class="offerings-list-item"
-        >
-          <div class="text-wrapper">
-            <h2 v-if="item.name">{{ item.name }}</h2>
-            <p v-if="item.description">{{ item.description }}</p>
+      <div class="offerings-list">
+        <div v-if="offerings" class="comp-bio">
+          <section
+            v-for="item in offerings"
+            :key="item._id"
+            class="offerings-list-item comp-bio-wrapper"
+          >
+            <div class="text-wrapper">
+              <h2 v-if="item.name">{{ item.name }}</h2>
+              <p v-if="item.description">{{ item.description }}</p>
 
-            <div v-if="item.name === 'A La Carte'" class="cta-button-wrapper">
-              <nuxt-link to="/alacarte" class="btn"
-                ><span class="title-style"
-                  >A La Carte Order Form</span
-                ></nuxt-link
-              >
+              <div v-if="item.name === 'A La Carte'" class="cta-button-wrapper">
+                <nuxt-link to="/alacarte" class="btn"
+                  ><span class="title-style"
+                    >A La Carte Order Form</span
+                  ></nuxt-link
+                >
+              </div>
             </div>
-          </div>
-          <div class="image-wrapper">
-            <figure v-if="item.img.url">
-              <img
-                :src="$urlFor(item.img.url).width(354).height(498).url()"
-                :alt="data.img.alt"
-                width="354"
-                height="498"
-              />
-            </figure>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
     </div>
   </div>
@@ -109,14 +105,22 @@ export default {
 
 <style lang="scss">
 .offerings-page {
-  .offerings-page-wrapper {
-    .offerings-list {
-      .offerings-list-item {
-        @include imageTextCols();
-        .cta-button-wrapper {
-          margin-top: 48px;
-        }
+  .page-intro-2 {
+    .text-wrapper {
+      @media (min-width: $collapse-bp) {
+        padding-bottom: 90px;
       }
+      h1 {
+        margin-bottom: 22px;
+      }
+    }
+  }
+}
+.offerings-list {
+  padding: 90px;
+  .offerings-list-item {
+    .cta-button-wrapper {
+      margin-top: 48px;
     }
   }
 }

@@ -50,7 +50,7 @@
           />
         </figure>
       </div>
-      <div class="gallery-wrapper" v-if="hasGallery">
+      <div ref="gallery" class="gallery-wrapper" v-if="data.gallery">
         <figure v-for="item in data.gallery" :key="item._key">
           <img
             :src="$urlFor(item.url).width(480).url()"
@@ -115,27 +115,61 @@ export default {
       nextSlug: undefined,
     };
   },
-  async mounted() {
-    const allWeddingsQuery = groq`*[_type == "weddings"]|order(_createdAt asc)`;
-    const allWeddings = await this.$sanity
-      .fetch(allWeddingsQuery)
-      .then((res) => res);
-
-    let thisIndex;
-    for (var i = 0; i < allWeddings.length; i++) {
-      if (allWeddings[i]._id === this.data._id) {
-        thisIndex = i;
+  mounted() {
+    this.setNextBtn();
+    this.$nextTick(() => {
+      this.setAnimation();
+    });
+  },
+  methods: {
+    setAnimation() {
+      if (!gsap) {
+        return;
       }
-    }
+      const gallery = this.$refs.gallery;
+      if (!gallery) {
+        return;
+      }
+      const pics = Array.from(gallery.querySelectorAll("figure"));
+      pics.forEach((pic) => {
+        gsap.set(pic, {
+          opacity: 0,
+        });
+        // console.log(pic.prevSibling);
+        gsap.to(pic, {
+          opacity: 1,
+          scrollTrigger: {
+            trigger: pic,
+            // markers: true,
+            start: "top bottom",
+            end: `+=${pic.offsetHeight}px`,
+            scrub: true,
+          },
+        });
+      });
+    },
+    async setNextBtn() {
+      const allWeddingsQuery = groq`*[_type == "weddings"]|order(_createdAt asc)`;
+      const allWeddings = await this.$sanity
+        .fetch(allWeddingsQuery)
+        .then((res) => res);
 
-    let nextIndex;
-    if (thisIndex === allWeddings.length - 1) {
-      nextIndex = 0;
-    } else {
-      nextIndex = thisIndex + 1;
-    }
+      let thisIndex;
+      for (var i = 0; i < allWeddings.length; i++) {
+        if (allWeddings[i]._id === this.data._id) {
+          thisIndex = i;
+        }
+      }
 
-    this.nextSlug = allWeddings[nextIndex].slug.current;
+      let nextIndex;
+      if (thisIndex === allWeddings.length - 1) {
+        nextIndex = 0;
+      } else {
+        nextIndex = thisIndex + 1;
+      }
+
+      this.nextSlug = allWeddings[nextIndex].slug.current;
+    },
   },
   computed: {
     hasGallery() {

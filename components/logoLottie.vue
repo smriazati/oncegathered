@@ -83,6 +83,7 @@ export default {
       if (this.debug) {
         console.log("Looped");
       }
+
       this.anim.pause();
       this.switchDirection();
     },
