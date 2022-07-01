@@ -63,7 +63,7 @@ export default {
       schemaType: "alaCartePage",
     };
   },
-  layout: "alacarte",
+  // layout: "alacarte",
 };
 </script>
 

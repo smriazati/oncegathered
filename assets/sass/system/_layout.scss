@@ -97,3 +97,11 @@ $half-container-width: 658px;
   }
 
 }
+
+@mixin headerMargin() {
+  margin-top: 125px;
+
+  @media (max-width: $collapse-bp) {
+    margin-top: 236px;
+  }
+}

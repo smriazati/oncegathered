@@ -1,8 +1,8 @@
 <template>
   <div class="alacarte success">
-    <header>
+    <!-- <header>
       <h1 class="purple-banner-title">A La Carte Order Form</h1>
-    </header>
+    </header> -->
     <main>
       <div class="text-wrapper">
         <p>
@@ -25,7 +25,7 @@ export default {
     content: null,
   }),
 
-  layout: "alacarte",
+  // layout: "alacarte",
 };
 </script>
 

@@ -58,6 +58,10 @@ export default {
 
 <style lang="scss">
 .site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   .site-header-wrapper {
     @include baseGrid;
     @media (min-width: $collapse-bp) {

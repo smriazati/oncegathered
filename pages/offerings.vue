@@ -117,7 +117,9 @@ export default {
   }
 }
 .offerings-list {
-  padding: 90px;
+  @media (min-width: $collapse-bp) {
+    padding: 90px;
+  }
   .offerings-list-item {
     .cta-button-wrapper {
       margin-top: 48px;

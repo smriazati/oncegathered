@@ -216,10 +216,12 @@ input {
 }
 
 .purple-banner-title {
-  @include bannerTitle($lavender);
+  @include bannerTitle($forest);
+  color: $buttercream;
 }
 
 .yellow-banner-title {
+
   @include bannerTitle($sunflower);
 }
 
@@ -262,14 +264,14 @@ input {
 
     @media (min-width: $collapse-bp) {
       min-height: 800px;
-      min-height: 80vh;
+      min-height: 90vh;
     }
 
     @media (max-width: $collapse-bp) {
       display: flex;
       flex-direction: column;
+      margin-top: 186px;
     }
-
 
     .text-wrapper {
       display: flex;

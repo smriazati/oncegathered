@@ -200,11 +200,19 @@ export default {
 
 <style lang="scss">
 .wedding-page {
+  @include headerMargin;
   padding: 33px 0;
   .pagination {
     position: fixed;
-    right: 0;
-    top: calc(50vh - 38px);
+    @media (min-width: $collapse-bp) {
+      right: 0;
+      top: calc(50vh - 38px);
+    }
+
+    @media (max-width: $collapse-bp) {
+      right: 5px;
+      bottom: 5px;
+    }
   }
   .grid-wrapper {
     @media (max-width: $collapse-bp) {

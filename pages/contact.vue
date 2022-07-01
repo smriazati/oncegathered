@@ -13,8 +13,8 @@
           </div>
           <div class="text-wrapper">
             <div class="email">
-              <p class="display-sm-style">
-                For inquiries, please get in touch via the email below.
+              <p v-if="data.page.ctaText" class="display-sm-style">
+                {{ data.page.ctaText }}.
               </p>
               <p v-if="data.contactInfo.siteEmail" class="display-sm-style">
                 <a
@@ -76,7 +76,8 @@ const query1 = groq`*[_type in ["contactPage", "contactInfo"]]{
     "img": {
         "url": img.image.asset->url,
         "alt": img.image.asset->altText
-      }
+      },
+      ctaText
   }[0],
   'contactInfo': *[_type=='contactInfo']{
     address, instagram, pinterest, siteEmail
@@ -112,9 +113,13 @@ export default {
           align-self: end;
           padding-left: 25%;
           max-width: $half-container-width;
+          flex-wrap: wrap;
+          justify-content: flex-start;
         }
         @media (max-width: $collapse-bp) {
           @include baseContainer;
+          align-items: flex-start;
+          flex-direction: column;
           > *:not(:last-child) {
             margin-top: 80px;
           }

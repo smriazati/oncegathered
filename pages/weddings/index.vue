@@ -101,6 +101,7 @@ export default {
 
 <style lang="scss">
 .weddings-page {
+  @include headerMargin();
   .slider-instructions {
     margin-top: 24px;
   }
@@ -173,7 +174,11 @@ export default {
           @media (min-width: $collapse-bp) {
             opacity: 0;
             transition: 0.8s ease all;
+            p {
+              white-space: nowrap;
+            }
           }
+
           p + p {
             padding-right: 0.5ch; // offset for italic
           }

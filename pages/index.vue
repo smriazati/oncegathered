@@ -39,8 +39,8 @@
         <div
           class="call-to-action-wrapper base-container flex-col flex-col-center"
         >
-          <p class="display-sm-style">
-            For inquiries, please get in touch via the email below.
+          <p v-if="data.content.ctaText" class="display-sm-style">
+            {{ data.content.ctaText }}
           </p>
           <p v-if="data.siteEmail" class="display-sm-style">
             <a :href="`mailto:${data.siteEmail}`">{{ data.siteEmail }}</a>
@@ -72,6 +72,7 @@ const query = groq`*[_type in ["homePage", "contactInfo"]]{
       }
    
   },
+  ctaText,
   centeredText1,
    "featuredSlider": slider[]->{
      _id, names, slug, "location": location->name, 
@@ -157,6 +158,9 @@ export default {
 </script>
 
 <style lang="scss">
+.home-page {
+  @include headerMargin();
+}
 .featured-testimonial {
   .grid-wrapper {
     .text-wrapper {

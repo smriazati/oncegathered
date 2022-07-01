@@ -363,31 +363,31 @@ form.alacarte {
     display: flex;
     justify-content: flex-start;
     align-self: flex-start;
-    span {
-      background: $deep-green;
-      @include bodyTypeface;
-      font-size: 18px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 26px;
-      letter-spacing: 0em;
-      color: $buttercream;
-      padding: 8px 16px;
-      transition: 0.3s ease all;
+    // span {
+    //   background: $deep-green;
+    //   @include bodyTypeface;
+    //   font-size: 18px;
+    //   font-style: normal;
+    //   font-weight: 400;
+    //   line-height: 26px;
+    //   letter-spacing: 0em;
+    //   color: $buttercream;
+    //   padding: 8px 16px;
+    //   transition: 0.3s ease all;
 
-      &:hover {
-        background: $coral;
-        color: $buttercream;
-      }
-    }
+    //   &:hover {
+    //     background: $coral;
+    //     color: $buttercream;
+    //   }
+    // }
 
     &:disabled {
-      span {
-        background: $charcoal;
-        &:hover {
-          cursor: default;
-        }
-      }
+      // span {
+      //   background: $charcoal;
+      //   &:hover {
+      //     cursor: default;
+      //   }
+      // }
     }
   }
 
