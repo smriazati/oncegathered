@@ -244,6 +244,10 @@ export default {
       grid-column: 1 / 2;
     }
   }
+
+  .grid-wrapper-text {
+    width: 100%;
+  }
   .grid-wrapper {
     @media (max-width: $collapse-bp) {
       grid-row-gap: 30px;
