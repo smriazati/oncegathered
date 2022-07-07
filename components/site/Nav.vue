@@ -3,6 +3,7 @@
     <div class="site-nav-wrapper">
       <nav class="main-nav">
         <ul>
+          <li><nuxt-link to="/" class="lg-screen-hide">Home</nuxt-link></li>
           <li><nuxt-link to="/weddings">Weddings</nuxt-link></li>
           <li><nuxt-link to="/offerings">Offerings</nuxt-link></li>
           <li><nuxt-link to="/about">About</nuxt-link></li>
@@ -20,14 +21,18 @@
       <section class="contact" v-if="hasEmail && hasInsta && !isMobile">
         <h2>Get in touch</h2>
         <p>
-          <a :href="`mailto:${data.siteEmail}`" target="_blank">{{
-            data.siteEmail
-          }}</a>
+          <a
+            :href="`mailto:${data.siteEmail}`"
+            target="_blank"
+            class="link-hover"
+            >{{ data.siteEmail }}</a
+          >
         </p>
         <p>
           <a
             :href="`https://www.instagram.com/${data.instagram}`"
             target="_blank"
+            class="link-hover"
             >@{{ data.instagram }}</a
           >
         </p>
@@ -146,7 +151,7 @@ export default {
       }
     }
 
-    section a {
+    section a:not(:hover) {
       color: inherit;
     }
     section.address {

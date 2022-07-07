@@ -20,14 +20,6 @@
 
 // sizing
 
-@mixin displayStyle() {
-  @include serifTypeface();
-  font-style: italic;
-  font-size: 48px;
-  line-height: 58px;
-  letter-spacing: 0em;
-}
-
 @mixin displaySmStyle() {
   @include serifTypeface();
   font-style: italic;
@@ -35,6 +27,22 @@
   line-height: 50px;
   letter-spacing: 0em;
 }
+
+@mixin displayStyle() {
+  @media (min-width: $collapse-bp) {
+    @include serifTypeface();
+    font-style: italic;
+    font-size: 48px;
+    line-height: 58px;
+    letter-spacing: 0em;
+  }
+
+  @media (max-width: $collapse-bp) {
+    @include displaySmStyle()
+  }
+
+}
+
 
 @mixin headingStyle() {
   @include serifTypeface();

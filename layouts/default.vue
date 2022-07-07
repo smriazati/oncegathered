@@ -4,12 +4,13 @@
       :class="isLoadingSectionFadingOut ? 'hide' : 'show'"
       v-if="showLoadingSection"
     />
-
     <SiteHeader />
-    <main class="site-main">
+    <main class="site-main" ref="main">
       <nuxt />
     </main>
-    <SiteFooter />
+    <footer class="site-footer" ref="footer">
+      <SiteFooter ref="footer" />
+    </footer>
   </div>
 </template>
 
@@ -27,6 +28,7 @@ export default {
   },
   mounted() {
     this.setLoadingSectionFadeOutTimer();
+    this.setMenuCollapseOnOutsideClick();
   },
   watch: {
     showLoadingSection() {
@@ -41,6 +43,26 @@ export default {
     },
   },
   methods: {
+    setMenuCollapseOnOutsideClick() {
+      const main = this.$refs.main;
+      if (main) {
+        main.addEventListener("click", this.checkMenuCollapse);
+      }
+      const footer = this.$refs.footer;
+      if (footer) {
+        footer.addEventListener("click", this.checkMenuCollapse);
+      }
+    },
+
+    checkMenuCollapse() {
+      const menuControlBtn = document.getElementById("menuControl");
+      const siteNav = document.getElementById("siteNav");
+      if (siteNav) {
+        if (siteNav.classList.contains("show")) {
+          menuControlBtn.click();
+        }
+      }
+    },
     setLoadingSectionFadeOutTimer() {
       this.fadeTimeOut = setTimeout(
         () => this.fadeOutLoadingSection(),

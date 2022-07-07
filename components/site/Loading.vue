@@ -24,7 +24,17 @@ export default {
   data() {
     return {
       speed: 1,
+      windowWidth: undefined,
+      windowHeight: undefined,
     };
+  },
+  mounted() {
+    this.windowWidth = window.innerWidth;
+    this.windowHeight = window.innerHeight;
+    window.addEventListener("resize", () => {
+      this.windowWidth = window.innerWidth;
+      this.windowHeight = window.innerHeight;
+    });
   },
   computed: {
     isMobile() {

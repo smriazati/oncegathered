@@ -1,63 +1,67 @@
 <template>
-  <div class="wedding-page">
-    <div class="wedding-page-wrapper grid-wrapper" v-if="data">
+  <div class="wedding-page" ref="container">
+    <div class="wedding-page-wrapper" v-if="data">
+      <div class="grid-wrapper grid-wrapper-gallery">
+        <div class="image-wrapper" v-if="hasFeatured">
+          <figure>
+            <img
+              :src="$urlFor(data.featuredImg.url).width(480).url()"
+              :alt="data.featuredImg.alt"
+              width="480"
+            />
+          </figure>
+        </div>
+        <div ref="gallery" class="gallery-wrapper" v-if="data.gallery">
+          <figure v-for="item in data.gallery" :key="item._key">
+            <img
+              :src="$urlFor(item.url).width(480).url()"
+              :alt="item.alt"
+              width="480"
+            />
+          </figure>
+        </div>
+      </div>
+      <div class="grid-wrapper grid-wrapper-text">
+        <div class="text-wrapper" ref="text">
+          <h1 v-if="data.names">{{ data.names }}</h1>
+          <ul>
+            <li v-if="data.location">
+              <span v-if="data.location.url">
+                <a :href="data.location.url" target="_blank">{{
+                  data.location.name
+                }}</a>
+              </span>
+              <span v-else>
+                {{ data.location.name }}
+              </span>
+            </li>
+            <li v-if="data.photographer">
+              <span v-if="data.photographer.url">
+                <a :href="data.photographer.url" target="_blank">{{
+                  data.photographer.name
+                }}</a>
+              </span>
+              <span v-else>
+                {{ data.photographer.name }}
+              </span>
+            </li>
+            <li v-if="data.planner">
+              <span v-if="data.planner.url">
+                <a :href="data.planner.url" target="_blank">{{
+                  data.planner.name
+                }}</a>
+              </span>
+              <span v-else>
+                {{ data.planner.name }}
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
       <div v-if="nextSlug" class="pagination">
         <nuxt-link :to="`/weddings/${nextSlug}`" class="btn btn-round"
           ><span>Next</span></nuxt-link
         >
-      </div>
-      <div class="text-wrapper">
-        <h1 v-if="data.names">{{ data.names }}</h1>
-        <ul>
-          <li v-if="data.location">
-            <span v-if="data.location.url">
-              <a :href="data.location.url" target="_blank">{{
-                data.location.name
-              }}</a>
-            </span>
-            <span v-else>
-              {{ data.location.name }}
-            </span>
-          </li>
-          <li v-if="data.photographer">
-            <span v-if="data.photographer.url">
-              <a :href="data.photographer.url" target="_blank">{{
-                data.photographer.name
-              }}</a>
-            </span>
-            <span v-else>
-              {{ data.photographer.name }}
-            </span>
-          </li>
-          <li v-if="data.planner">
-            <span v-if="data.planner.url">
-              <a :href="data.planner.url" target="_blank">{{
-                data.planner.name
-              }}</a>
-            </span>
-            <span v-else>
-              {{ data.planner.name }}
-            </span>
-          </li>
-        </ul>
-      </div>
-      <div class="image-wrapper" v-if="hasFeatured">
-        <figure>
-          <img
-            :src="$urlFor(data.featuredImg.url).width(480).url()"
-            :alt="data.featuredImg.alt"
-            width="480"
-          />
-        </figure>
-      </div>
-      <div ref="gallery" class="gallery-wrapper" v-if="data.gallery">
-        <figure v-for="item in data.gallery" :key="item._key">
-          <img
-            :src="$urlFor(item.url).width(480).url()"
-            :alt="item.alt"
-            width="480"
-          />
-        </figure>
       </div>
     </div>
   </div>
@@ -110,8 +114,10 @@ export default {
       ],
     };
   },
+  scrollToTop: true,
   data() {
     return {
+      // containerHeight: undefined,
       nextSlug: undefined,
     };
   },
@@ -126,27 +132,41 @@ export default {
       if (!gsap) {
         return;
       }
-      const gallery = this.$refs.gallery;
-      if (!gallery) {
-        return;
-      }
-      const pics = Array.from(gallery.querySelectorAll("figure"));
-      pics.forEach((pic) => {
-        gsap.set(pic, {
-          opacity: 0,
-        });
-        // console.log(pic.prevSibling);
-        gsap.to(pic, {
-          opacity: 1,
-          scrollTrigger: {
-            trigger: pic,
-            // markers: true,
-            start: "top bottom",
-            end: `+=${pic.offsetHeight}px`,
-            scrub: true,
-          },
-        });
-      });
+
+      // const text = this.$refs.text;
+      // gsap.to(text, {
+      //   scrollTrigger: {
+      //     trigger: text,
+      //     start: "top top",
+      //     // end: `+=${this.data.weddings.length * }`,
+      //     pin: true,
+      //     pinSpacing: false,
+      //     scrub: 1,
+      //     markers: true,
+      //   },
+      // });
+
+      // const gallery = this.$refs.gallery;
+      // if (!gallery) {
+      //   return;
+      // }
+      // const pics = Array.from(gallery.querySelectorAll("figure"));
+      // pics.forEach((pic) => {
+      //   gsap.set(pic, {
+      //     opacity: 0,
+      //   });
+      //   // console.log(pic.prevSibling);
+      //   gsap.to(pic, {
+      //     opacity: 1,
+      //     scrollTrigger: {
+      //       trigger: pic,
+      //       // markers: true,
+      //       start: "top bottom",
+      //       end: `+=${pic.offsetHeight}px`,
+      //       scrub: true,
+      //     },
+      //   });
+      // });
     },
     async setNextBtn() {
       const allWeddingsQuery = groq`*[_type == "weddings"]|order(_createdAt asc)`;
@@ -214,6 +234,16 @@ export default {
       bottom: 5px;
     }
   }
+
+  .wedding-page-wrapper {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    > * {
+      grid-row: 1 / 2;
+      grid-column: 1 / 2;
+    }
+  }
   .grid-wrapper {
     @media (max-width: $collapse-bp) {
       grid-row-gap: 30px;
@@ -222,9 +252,7 @@ export default {
       @media (min-width: $collapse-bp) {
         grid-column: 1 / span 4;
         grid-row: 1 / 3;
-        &:not(:last-child) {
-          padding-top: 25vh;
-        }
+        padding-top: 25vh;
       }
       @media (max-width: $collapse-bp) {
         grid-column: 1 / span 4;
@@ -268,8 +296,10 @@ export default {
   }
 
   .gallery-wrapper {
+    margin-top: 36px;
     figure {
       width: 100%;
+      padding-bottom: 36px;
       img {
         @media (min-width: $collapse-bp) {
           min-width: 100%;

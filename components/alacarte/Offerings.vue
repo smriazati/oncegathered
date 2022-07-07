@@ -104,7 +104,7 @@ export default {
       .title {
         @include displayTypeface;
         font-size: 48px;
-        font-style: italic;
+        font-style: normal;
         font-weight: 300;
         line-height: 42px;
         letter-spacing: 0em;

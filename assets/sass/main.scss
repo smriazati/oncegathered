@@ -10,6 +10,10 @@
   padding: 0;
 }
 
+::selection {
+  background: $sunflower;
+}
+
 body {
   background: $buttercream;
   color: $charcoal;
@@ -51,6 +55,11 @@ h3,
 .h3,
 .display-sm-style {
   @include displaySmStyle();
+}
+
+.display-sm-style-normal {
+  @include displaySmStyle();
+  font-style: normal;
 }
 
 .title-style {
@@ -122,7 +131,16 @@ button:not(.no-btn-style),
 }
 
 .link-underline {
-  text-decoration: underline;
+  // text-decoration: underline;
+  border-bottom: 1px solid $charcoal;
+}
+
+.link-hover {
+  transition: .3s ease all;
+
+  &:hover {
+    color: $coral;
+  }
 }
 
 // layouts
@@ -264,7 +282,7 @@ input {
 
     @media (min-width: $collapse-bp) {
       min-height: 800px;
-      min-height: 90vh;
+      min-height: 100vh;
     }
 
     @media (max-width: $collapse-bp) {
@@ -319,5 +337,11 @@ input {
         }
       }
     }
+  }
+}
+
+.lg-screen-hide {
+  @media (min-width: $collapse-bp) {
+    display: none;
   }
 }

@@ -19,11 +19,21 @@ $btnTransition: .25s ease-in all;
   background: $deep-green;
   color: $buttercream;
   padding: 10px 20px;
+  transition: .8s ease all;
 
   span {
     @include sansSerifTypeface;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 26px;
+    transition: .8s ease all;
+  }
+
+  &:hover {
+    padding: 12px 22px;
+
+    span {
+      font-size: 16px;
+    }
   }
 }
 
@@ -57,6 +67,11 @@ $btnTransition: .25s ease-in all;
     font-style: italic;
     line-height: 18px;
     letter-spacing: 0.02em;
+    transition: .8s ease all;
+  }
+
+  &:hover {
+    font-size: 16px;
   }
 }
 

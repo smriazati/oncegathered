@@ -1,52 +1,47 @@
 <template>
-  <footer class="site-footer">
-    <div class="site-footer-wrapper">
-      <nav class="site-map">
-        <ul>
-          <li><nuxt-link to="/weddings">Weddings</nuxt-link></li>
-          <li><nuxt-link to="/offerings">Offerings</nuxt-link></li>
-          <li><nuxt-link to="/about">About</nuxt-link></li>
-          <li><nuxt-link to="/alacarte">Order A La Carte</nuxt-link></li>
-        </ul>
-      </nav>
-      <div class="submark">
-        <nuxt-link to="/"><SiteSubmark :width="150" /></nuxt-link>
-      </div>
-      <nav class="contact-links">
-        <ul>
-          <li><nuxt-link to="/contact">Get in Touch</nuxt-link></li>
-          <li v-if="hasEmail">
-            <a :href="data.email" target="_blank">Email</a>
-          </li>
-          <li v-if="hasInstagram">
-            <a
-              :href="`https://www.instagram.com/${data.instagram}`"
-              target="_blank"
-              >Instagram</a
-            >
-          </li>
-          <li v-if="hasPinterest">
-            <a
-              :href="`https://www.pinterest.com/${data.pinterest}`"
-              target="_blank"
-              >Pinterest</a
-            >
-          </li>
-        </ul>
-      </nav>
-      <div class="footer-text">
-        <p>
-          © {{ currentYear }} Once Gathered.
-          <a
-            href="https://www.otherlove.co"
-            target="_blank"
-            class="link-inherit"
-            >Made with Otherlove.</a
-          >
-        </p>
-      </div>
+  <div class="site-footer-wrapper">
+    <nav class="site-map">
+      <ul>
+        <li><nuxt-link to="/weddings">Weddings</nuxt-link></li>
+        <li><nuxt-link to="/offerings">Offerings</nuxt-link></li>
+        <li><nuxt-link to="/about">About</nuxt-link></li>
+        <li><nuxt-link to="/alacarte">Order A La Carte</nuxt-link></li>
+      </ul>
+    </nav>
+    <div class="submark">
+      <nuxt-link to="/"><SiteSubmark :width="150" /></nuxt-link>
     </div>
-  </footer>
+    <nav class="contact-links">
+      <ul>
+        <li><nuxt-link to="/contact">Get in Touch</nuxt-link></li>
+        <li v-if="hasEmail">
+          <a :href="data.email" target="_blank">Email</a>
+        </li>
+        <li v-if="hasInstagram">
+          <a
+            :href="`https://www.instagram.com/${data.instagram}`"
+            target="_blank"
+            >Instagram</a
+          >
+        </li>
+        <li v-if="hasPinterest">
+          <a
+            :href="`https://www.pinterest.com/${data.pinterest}`"
+            target="_blank"
+            >Pinterest</a
+          >
+        </li>
+      </ul>
+    </nav>
+    <div class="footer-text">
+      <p>
+        © {{ currentYear }} Once Gathered.
+        <a href="https://www.otherlove.co" target="_blank" class="link-inherit"
+          >Made with Otherlove.</a
+        >
+      </p>
+    </div>
+  </div>
 </template>
 
 
@@ -178,7 +173,7 @@ export default {
             line-height: 32px;
           }
           @media (max-width: $collapse-bp) {
-            font-size: 10px;
+            font-size: 12px;
             line-height: 30px;
           }
         }

@@ -19,7 +19,7 @@
                 <li
                   v-for="(item, index) in offeringsList"
                   :key="index"
-                  class="display-sm-style"
+                  class="display-sm-style-normal"
                 >
                   {{ item }}
                 </li>

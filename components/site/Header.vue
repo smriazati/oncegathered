@@ -8,7 +8,7 @@
           <SiteStackedLogo v-else :width="330" />
         </nuxt-link>
       </h1>
-      <button @click="toggleMenu()">
+      <button @click="toggleMenu()" id="menuControl">
         <span v-if="!isExpanded">Menu</span>
         <span v-else class="light-text">Close</span>
       </button>
@@ -16,6 +16,7 @@
         :aria-expanded="`${isExpanded}`"
         :isMobile="isMobile"
         :class="isExpanded ? 'show' : 'hide'"
+        id="siteNav"
       />
     </div>
   </header>
@@ -71,6 +72,9 @@ export default {
       @include btnRoundMenu();
       position: relative;
       z-index: 201;
+      span  {
+        font-size: 14px;
+      }
       @media (min-width: $collapse-bp) {
         grid-column: 1 / 3;
         grid-row: 1 / 2;

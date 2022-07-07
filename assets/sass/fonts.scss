@@ -1,16 +1,3 @@
-// @font-face {
-//     font-family: 'Reckless';
-//     src: url('../fonts/RecklessNeueTRIAL-Light.otf');
-//     font-weight: 400;
-//     font-style: normal;
-// }
-// @font-face {
-//     font-family: 'Reckless';
-//     src: url('../fonts/RecklessNeueTRIAL-LightItalic.otf');
-//     font-weight: 400;
-//     font-style: italic;
-// }
-
 @font-face {
   font-family: 'HK Grotesk';
   src: url('../fonts/hkgrotesk/HKGrotesk-Regular.woff2') format('woff2'),
@@ -19,14 +6,13 @@
 
 @font-face {
   font-family: 'Queens';
-  src: url('../fonts/queens/Queens_W-Light.woff2') format('woff2'),
-    url('../fonts/queens/Queens_W-Light.woff') format('woff');
+  src: url('../fonts/queens/Queens_W-Thin.woff2') format('woff2'),
+    url('../fonts/queens/Queens_W-Thin.woff') format('woff');
 }
-
 
 @font-face {
   font-family: 'Queens';
   font-style: italic;
-  src: url('../fonts/queens/Queens_W-LightItalic.woff2') format('woff2'),
-    url('../fonts/queens/Queens_W-LightItalic.woff') format('woff');
+  src: url('../fonts/queens/Queens_W-ThinItalic.woff2') format('woff2'),
+    url('../fonts/queens/Queens_W-ThinItalic.woff') format('woff');
 }

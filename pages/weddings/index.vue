@@ -18,7 +18,12 @@
             <figure>
               <div v-if="item.img.url" class="image-wrapper">
                 <img
-                  :src="$urlFor(item.img.url).width(480).height(433).url()"
+                  :src="
+                    $urlFor(item.img.url)
+                      .width(480 * 2)
+                      .height(433 * 2)
+                      .url()
+                  "
                   :alt="item.img.alt"
                   width="480"
                   height="433"
@@ -85,13 +90,10 @@ export default {
       }
       slider.scrollLeft += event.deltaY + event.deltaX;
 
-      // this should change depending on content of slider...
-      // console.log(slider.offsetWidth, slider.scrollLeft);
-      const offset = this.data.weddings.length;
-      const sliderStart = slider.offsetTop;
-      const sliderEnd = this.data.weddings.length * 100 - offset;
-      // console.log(slider.scrollLeft, sliderEnd);
+      const sliderStart = 0;
+      const sliderEnd = this.data.weddings.length * 180;
       if (slider.scrollLeft < sliderEnd && slider.scrollLeft > sliderStart) {
+        // console.log("freeze scroll");
         event.preventDefault();
       }
     },
