@@ -91,7 +91,7 @@ export default {
       slider.scrollLeft += event.deltaY + event.deltaX;
 
       const sliderStart = 0;
-      const sliderEnd = this.data.weddings.length * 100;
+      const sliderEnd = this.data.weddings.length * 100 + 100;
       if (slider.scrollLeft < sliderEnd && slider.scrollLeft > sliderStart) {
         // console.log("freeze scroll");
         event.preventDefault();
