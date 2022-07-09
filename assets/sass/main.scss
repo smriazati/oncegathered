@@ -346,11 +346,16 @@ input {
   }
 }
 
-img {
-  opacity: 0;
-  transition: .5s ease all;
+// img {
+//   opacity: 0;
+//   transition: .5s ease all;
 
-  &.lazyLoad.isLoaded {
-    opacity: 1;
-  }
+//   &.lazyLoad.isLoaded {
+//     opacity: 1;
+//   }
+// }
+
+
+#__layout {
+  overflow: hidden;
 }

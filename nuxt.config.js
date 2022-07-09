@@ -101,11 +101,11 @@ export default async() => {
     preconnect: true
   },
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    ['nuxt-lazy-load', {
-      // Your options
-    }]
-  ],  
+  // modules: [
+  //   ['nuxt-lazy-load', {
+  //     // Your options
+  //   }]
+  // ],  
   generate: {
     // fallback: '404.html',
     fallback: false,

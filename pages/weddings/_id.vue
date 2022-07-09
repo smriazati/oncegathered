@@ -1,10 +1,11 @@
 <template>
   <div class="wedding-page" ref="container">
-    <div class="wedding-page-wrapper" v-if="data">
+    <div class="wedding-page-wrapper" v-if="data" ref="wrapper">
       <div class="grid-wrapper grid-wrapper-gallery">
         <div class="image-wrapper" v-if="hasFeatured">
           <figure>
             <img
+              @load="handleLoad"
               :src="$urlFor(data.featuredImg.url).width(480).url()"
               :alt="data.featuredImg.alt"
               width="480"
@@ -14,6 +15,7 @@
         <div ref="gallery" class="gallery-wrapper" v-if="data.gallery">
           <figure v-for="item in data.gallery" :key="item._key">
             <img
+              @load="handleLoad"
               :src="$urlFor(item.url).width(480).url()"
               :alt="item.alt"
               width="480"
@@ -119,36 +121,63 @@ export default {
     return {
       // containerHeight: undefined,
       nextSlug: undefined,
+      imagesLoaded: 0,
     };
   },
   mounted() {
+    this.registerScrollTrigger();
+    this.watchDivHeight();
     this.setNextBtn();
-    this.$nextTick(() => {
-      this.setAnimation();
-    });
+  },
+  beforeDestroy() {
+    // console.log("killing st");
+    ScrollTrigger.getAll().forEach((t) => t.kill());
   },
   methods: {
-    setAnimation() {
+    registerScrollTrigger() {
       if (!gsap) {
         return;
       }
+      gsap.registerPlugin(ScrollTrigger);
+    },
+    watchDivHeight() {
+      const wrapper = this.$refs.wrapper;
+      const resize_ob = new ResizeObserver(() => {
+        // console.log("div height change");
+        this.$nextTick(() => {
+          // this.setAnimation();
+          ScrollTrigger.refresh();
+        });
+      });
+      resize_ob.observe(wrapper);
+    },
+    handleLoad() {
+      this.imagesLoaded++;
+      // console.log("img loaded");
 
-      // const footer = document.querySelector("footer.site-footer");
-      // // console.log(footer);
-      // const text = this.$refs.text;
-
-      // gsap.to(text, {
-      //   scrollTrigger: {
-      //     trigger: text,
-      //     start: "top top",
-      //     endTrigger: footer,
-      //     end: "top bottom",
-      //     pin: true,
-      //     // pinSpacing: false,
-      //     scrub: 1,
-      //     markers: true,
-      //   },
-      // });
+      this.$nextTick(() => {
+        this.setAnimation();
+      });
+    },
+    setAnimation() {
+      const footer = document.querySelector("footer.site-footer");
+      // console.log(footer);
+      const text = this.$refs.text;
+      if (!footer || !text) {
+        return;
+      }
+      gsap.from(text, {
+        scrollTrigger: {
+          trigger: text,
+          start: "top top",
+          endTrigger: footer,
+          end: "bottom top",
+          pin: true,
+          pinSpacing: false,
+          scrub: 1.1,
+          markers: true,
+        },
+      });
     },
     async setNextBtn() {
       const allWeddingsQuery = groq`*[_type == "weddings"]|order(_createdAt asc)`;
