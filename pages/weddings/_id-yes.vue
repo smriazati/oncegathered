@@ -1,7 +1,29 @@
 <template>
   <div class="wedding-page" ref="container">
     <div class="wedding-page-wrapper" v-if="data" ref="wrapper">
-      <div class="grid-wrapper">
+      <div class="grid-wrapper grid-wrapper-gallery">
+        <div class="image-wrapper" v-if="hasFeatured">
+          <figure>
+            <img
+              @load="handleLoad"
+              :src="$urlFor(data.featuredImg.url).width(480).url()"
+              :alt="data.featuredImg.alt"
+              width="480"
+            />
+          </figure>
+        </div>
+        <div ref="gallery" class="gallery-wrapper" v-if="data.gallery">
+          <figure v-for="item in data.gallery" :key="item._key">
+            <img
+              @load="handleLoad"
+              :src="$urlFor(item.url).width(480).url()"
+              :alt="item.alt"
+              width="480"
+            />
+          </figure>
+        </div>
+      </div>
+      <div class="grid-wrapper grid-wrapper-text">
         <div class="text-wrapper" ref="text">
           <h1 v-if="data.names">{{ data.names }}</h1>
           <ul>
@@ -37,28 +59,7 @@
             </li>
           </ul>
         </div>
-        <div class="image-wrapper" v-if="hasFeatured">
-          <figure>
-            <img
-              @load="handleLoad"
-              :src="$urlFor(data.featuredImg.url).width(480).url()"
-              :alt="data.featuredImg.alt"
-              width="480"
-            />
-          </figure>
-        </div>
-        <div ref="gallery" class="gallery-wrapper" v-if="data.gallery">
-          <figure v-for="item in data.gallery" :key="item._key">
-            <img
-              @load="handleLoad"
-              :src="$urlFor(item.url).width(480).url()"
-              :alt="item.alt"
-              width="480"
-            />
-          </figure>
-        </div>
       </div>
-
       <div v-if="nextSlug" class="pagination">
         <nuxt-link :to="`/weddings/${nextSlug}`" class="btn btn-round"
           ><span>Next</span></nuxt-link
@@ -178,7 +179,7 @@ export default {
           pin: true,
           pinSpacing: false,
           scrub: 1.1,
-          // markers: true,
+          markers: true,
         },
       });
     },
@@ -249,54 +250,32 @@ export default {
     }
   }
 
-  // .wedding-page-wrapper {
-  //   .grid-wrapper {
-  //     .text-wrapper {
-  //       @media (min-width: $collapse-bp) {
-  //         grid-row: 1 / 2;
-  //         grid-column: 1 / 5;
-  //       }
-  //       @media (max-width: $collapse-bp) {
-  //         grid-row: 1 / 2;
-  //         grid-column: 1 / 2;
-  //       }
-  //     }
-  //     .galleries-wrapper {
-  //       @media (min-width: $collapse-bp) {
-  //         grid-row: 1 / 2;
-  //         grid-column: 5 / 8;
-  //       }
-  //       @media (max-width: $collapse-bp) {
-  //         grid-row: 1 / 2;
-  //         grid-column: 1 / 2;
-  //       }
-  //     }
-  //   }
-  //   // display: grid;
-  //   // grid-template-columns: 100%;
-  //   // @media (min-width: $collapse-bp) {
-  //   //   grid-template-rows: 100%;
-  //   // }
-  //   // @media (max-width: $collapse-bp) {
-  //   //   grid-auto-rows: min-content;
-  //   // }
-  //   // > * {
-  //   //   @media (min-width: $collapse-bp) {
-  //   //     grid-row: 1 / 2;
-  //   //     grid-column: 1 / 2;
-  //   //   }
-  //   //   @media (max-width: $collapse-bp) {
-  //   //     &.grid-wrapper-text {
-  //   //       grid-row: 1 / 2;
-  //   //       grid-column: 1 / 2;
-  //   //     }
-  //   //     &.grid-wrapper-gallery {
-  //   //       grid-row: 2 / 3;
-  //   //       grid-column: 1 / 2;
-  //   //     }
-  //   //   }
-  //   // }
-  // }
+  .wedding-page-wrapper {
+    display: grid;
+    grid-template-columns: 100%;
+    @media (min-width: $collapse-bp) {
+      grid-template-rows: 100%;
+    }
+    @media (max-width: $collapse-bp) {
+      grid-auto-rows: min-content;
+    }
+    > * {
+      @media (min-width: $collapse-bp) {
+        grid-row: 1 / 2;
+        grid-column: 1 / 2;
+      }
+      @media (max-width: $collapse-bp) {
+        &.grid-wrapper-text {
+          grid-row: 1 / 2;
+          grid-column: 1 / 2;
+        }
+        &.grid-wrapper-gallery {
+          grid-row: 2 / 3;
+          grid-column: 1 / 2;
+        }
+      }
+    }
+  }
 
   .grid-wrapper-text {
     width: 100%;
