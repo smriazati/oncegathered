@@ -133,39 +133,21 @@ export default {
         return;
       }
 
+      // const footer = document.querySelector("footer.site-footer");
+      // // console.log(footer);
       // const text = this.$refs.text;
+
       // gsap.to(text, {
       //   scrollTrigger: {
       //     trigger: text,
       //     start: "top top",
-      //     // end: `+=${this.data.weddings.length * }`,
+      //     endTrigger: footer,
+      //     end: "top bottom",
       //     pin: true,
-      //     pinSpacing: false,
+      //     // pinSpacing: false,
       //     scrub: 1,
       //     markers: true,
       //   },
-      // });
-
-      // const gallery = this.$refs.gallery;
-      // if (!gallery) {
-      //   return;
-      // }
-      // const pics = Array.from(gallery.querySelectorAll("figure"));
-      // pics.forEach((pic) => {
-      //   gsap.set(pic, {
-      //     opacity: 0,
-      //   });
-      //   // console.log(pic.prevSibling);
-      //   gsap.to(pic, {
-      //     opacity: 1,
-      //     scrollTrigger: {
-      //       trigger: pic,
-      //       // markers: true,
-      //       start: "top bottom",
-      //       end: `+=${pic.offsetHeight}px`,
-      //       scrub: true,
-      //     },
-      //   });
       // });
     },
     async setNextBtn() {

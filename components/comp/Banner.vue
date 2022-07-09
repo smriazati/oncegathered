@@ -3,12 +3,13 @@
     <div class="comp-banner-wrapper grid-wrapper">
       <figure ref="img">
         <img
+          @load="handleLoad"
           :src="$urlFor(data.img.url).width(984).url()"
           :alt="data.img.alt"
           width="984"
         />
       </figure>
-      <div class="scroll-hint" ref="btn">
+      <div class="scroll-hint" ref="btn" id="scroll-hint">
         <div class="btn btn-round"><span>Scroll</span></div>
       </div>
     </div>
@@ -27,10 +28,13 @@ export default {
     this.setAnimation();
   },
   methods: {
+    handleLoad() {
+      this.$emit("on-image-load", true);
+    },
     setAnimation() {
       gsap.registerPlugin(ScrollTrigger);
       this.setImgAnimation();
-      this.setBtnAnimation();
+      // this.setBtnAnimation();
     },
     setImgAnimation() {
       const img = this.$refs.img;
@@ -55,28 +59,6 @@ export default {
         opacity: 1,
         duration: 1.3,
         delay: 0.7,
-      });
-    },
-    setBtnAnimation() {
-      const btn = this.$refs.btn;
-      if (!btn) {
-        return;
-      }
-      gsap.set(btn, {
-        scale: 1,
-        y: 50,
-      });
-      gsap.to(btn, {
-        y: window.innerHeight - window.innerHeight / 4,
-        scale: 0,
-        scrollTrigger: {
-          // markers: true,
-          start: "top top",
-          end: () => {
-            return `"+=${window.innerHeight / 2 + window.innerHeight / 8}"`;
-          },
-          scrub: 1.1,
-        },
       });
     },
   },

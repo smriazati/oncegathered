@@ -59,7 +59,7 @@ h3,
 
 .display-sm-style-normal {
   @include displaySmStyle();
-  font-style: normal;
+  font-style: normal !important;
 }
 
 .title-style {
@@ -343,5 +343,14 @@ input {
 .lg-screen-hide {
   @media (min-width: $collapse-bp) {
     display: none;
+  }
+}
+
+img {
+  opacity: 0;
+  transition: .5s ease all;
+
+  &.lazyLoad.isLoaded {
+    opacity: 1;
   }
 }

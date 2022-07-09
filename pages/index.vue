@@ -2,11 +2,14 @@
   <div class="home-page">
     <h1 class="visually-hidden">Home</h1>
     <div class="home-page-wrapper" ref="wrapper" v-if="data.content">
-      <CompBanner :data="data.content.banner" />
+      <CompBanner
+        :data="data.content.banner"
+        @on-image-load="onBannerImageLoad"
+      />
       <CompCenteredText
         :data="data.content.centeredText1"
         theme="deep-green"
-        class="gsap-scale-in"
+        class="gsap-scale-in scroll-hint-trigger-wrapper"
       />
       <CompFeaturedSlider :data="data.content.featuredSlider" />
       <div class="featured-testimonial gsap-scale-in">
@@ -99,8 +102,52 @@ export default {
     this.setAnimation();
   },
   methods: {
+    onBannerImageLoad(payload) {
+      if (payload) {
+        console.log("image loaded");
+        this.setBannerBtnAnimation();
+      }
+    },
     setAnimation() {
       gsap.registerPlugin(ScrollTrigger);
+      this.setSectionAnimation();
+      // this.setBannerBtnAnimation();
+    },
+    setBannerBtnAnimation() {
+      const wrapper = this.$refs.wrapper;
+      if (!wrapper) {
+        return;
+      }
+
+      const btn = document.getElementById("scroll-hint");
+      const trigger = wrapper.querySelector(
+        ".scroll-hint-trigger-wrapper .link-object a"
+      );
+      console.log(btn.clientTop, trigger.clientTop);
+      if (!btn || !trigger) {
+        return;
+      }
+      const btnContainerPadding = 164; // fixed padding
+      const btnHeight = 55;
+      const triggerOffset = trigger.offsetTop;
+      gsap.set(btn, {
+        scale: 1,
+        y: 50,
+      });
+      gsap.to(btn, {
+        y: btnContainerPadding + btnHeight + triggerOffset,
+        scale: 0,
+        scrollTrigger: {
+          // markers: true,
+          start: "top top",
+          end: () => {
+            return `"+=${trigger.offsetTop}"`;
+          },
+          scrub: 1.1,
+        },
+      });
+    },
+    setSectionAnimation() {
       const wrapper = this.$refs.wrapper;
       if (!wrapper) {
         return;

@@ -19,7 +19,7 @@
                 <li
                   v-for="(item, index) in offeringsList"
                   :key="index"
-                  class="display-sm-style-normal"
+                  class="display-sm-style"
                 >
                   {{ item }}
                 </li>
@@ -112,6 +112,10 @@ export default {
       }
       h1 {
         margin-bottom: 22px;
+      }
+
+      li:not(:last-child) {
+        margin-bottom: 11px;
       }
     }
   }

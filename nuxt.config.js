@@ -102,7 +102,10 @@ export default async() => {
   },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-  ],
+    ['nuxt-lazy-load', {
+      // Your options
+    }]
+  ],  
   generate: {
     // fallback: '404.html',
     fallback: false,
