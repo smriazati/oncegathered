@@ -204,9 +204,9 @@ export default {
             @media (min-width: $collapse-bp) {
               margin-bottom: 70px;
             }
-            @media (max-width: $collapse-bp) {
-              margin-bottom: 40px;
-            }
+          }
+          @media (max-width: $collapse-bp) {
+            margin-bottom: 40px;
           }
         }
       }
