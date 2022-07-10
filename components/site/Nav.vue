@@ -130,7 +130,12 @@ export default {
   color: $buttercream;
   .site-nav-wrapper {
     @include baseGrid;
-    padding: 142px 0;
+    @media (min-width: $collapse-bp) {
+      padding: 142px 0;
+    }
+    @media (max-width: $collapse-bp) {
+      padding: 92px 0;
+    }
 
     nav.main-nav {
       .nuxt-link-exact-active {
@@ -196,7 +201,12 @@ export default {
           line-height: 58px;
           letter-spacing: 0em;
           &:not(:last-child) {
-            margin-bottom: 70px;
+            @media (min-width: $collapse-bp) {
+              margin-bottom: 70px;
+            }
+            @media (max-width: $collapse-bp) {
+              margin-bottom: 40px;
+            }
           }
         }
       }
