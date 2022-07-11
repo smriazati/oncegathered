@@ -62,12 +62,15 @@
 @mixin largeTextStyle() {
   @include sansSerifTypeface();
   font-size: 20px;
+  font-style: normal;
+
   line-height: 35px;
 }
 
 @mixin textStyle() {
   @include sansSerifTypeface();
   font-size: 16px;
+  font-style: normal;
   line-height: 26px;
 }
 
