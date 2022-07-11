@@ -105,6 +105,7 @@ export default {
       @media (max-width: $collapse-bp) {
         grid-column: 2 / 4;
       }
+      transform: translateY(50px);
       align-self: end;
       justify-self: center;
       grid-row: 1 / 2;

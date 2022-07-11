@@ -103,50 +103,50 @@ export default {
   },
   methods: {
     onBannerImageLoad(payload) {
-      if (payload) {
-        console.log("image loaded");
-        this.setBannerBtnAnimation();
-      }
+      // if (payload) {
+      //   console.log("image loaded");
+      //   // this.setBannerBtnAnimation();
+      // }
     },
     setAnimation() {
       gsap.registerPlugin(ScrollTrigger);
       this.setSectionAnimation();
       // this.setBannerBtnAnimation();
     },
-    setBannerBtnAnimation() {
-      const wrapper = this.$refs.wrapper;
-      if (!wrapper) {
-        return;
-      }
+    // setBannerBtnAnimation() {
+    //   const wrapper = this.$refs.wrapper;
+    //   if (!wrapper) {
+    //     return;
+    //   }
 
-      const btn = document.getElementById("scroll-hint");
-      const trigger = wrapper.querySelector(
-        ".scroll-hint-trigger-wrapper .link-object a"
-      );
-      console.log(btn.clientTop, trigger.clientTop);
-      if (!btn || !trigger) {
-        return;
-      }
-      const btnContainerPadding = 164; // fixed padding
-      const btnHeight = 55;
-      const triggerOffset = trigger.offsetTop;
-      gsap.set(btn, {
-        scale: 1,
-        y: 50,
-      });
-      gsap.to(btn, {
-        y: btnContainerPadding + btnHeight + triggerOffset,
-        scale: 0,
-        scrollTrigger: {
-          // markers: true,
-          start: "top top",
-          end: () => {
-            return `"+=${trigger.offsetTop}"`;
-          },
-          scrub: 1.1,
-        },
-      });
-    },
+    //   const btn = document.getElementById("scroll-hint");
+    //   const trigger = wrapper.querySelector(
+    //     ".scroll-hint-trigger-wrapper .link-object a"
+    //   );
+    //   console.log(btn.clientTop, trigger.clientTop);
+    //   if (!btn || !trigger) {
+    //     return;
+    //   }
+    //   const btnContainerPadding = 164; // fixed padding
+    //   const btnHeight = 55;
+    //   const triggerOffset = trigger.offsetTop;
+    //   gsap.set(btn, {
+    //     scale: 1,
+    //     y: 50,
+    //   });
+    //   gsap.to(btn, {
+    //     y: btnContainerPadding + btnHeight + triggerOffset,
+    //     scale: 0,
+    //     scrollTrigger: {
+    //       // markers: true,
+    //       start: "top top",
+    //       end: () => {
+    //         return `"+=${trigger.offsetTop}"`;
+    //       },
+    //       scrub: 1.1,
+    //     },
+    //   });
+    // },
     setSectionAnimation() {
       const wrapper = this.$refs.wrapper;
       if (!wrapper) {
