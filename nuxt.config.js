@@ -107,20 +107,20 @@ export default async() => {
   //   }]
   // ],  
   generate: {
-    // fallback: '404.html',
-    fallback: false,
+    fallback: '404.html',
+    // fallback: false,
     exclude: [
       /^\/new/ // path starts with /admin
     ],
-    // async routes() {
-    //   const weddings = (await sanity.fetch(dynamicRouteQuery)) || []
-    //   return weddings.map((wedding) => {
-    //     return {
-    //       route: `/weddings/${wedding.slug}/`,
-    //       payload: wedding,
-    //     }
-    //   })
-    // }
+    async routes() {
+      const weddings = (await sanity.fetch(dynamicRouteQuery)) || []
+      return weddings.map((wedding) => {
+        return {
+          route: `/weddings/${wedding.slug}/`,
+          payload: wedding,
+        }
+      })
+    }
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

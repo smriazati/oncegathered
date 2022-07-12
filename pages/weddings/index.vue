@@ -95,6 +95,7 @@ export default {
       scrollVal: 0,
       canSliderScrollRight: true,
       canSliderScrollLeft: false,
+      magicMulitiplier: 1.36, // calculated slider width / tested scroll left
     };
   },
   mounted() {
@@ -102,29 +103,50 @@ export default {
     element.addEventListener("wheel", (e) => this.transformScroll(e), {
       passive: false,
     });
+
+    // this.watchSliderScroll();
   },
   computed: {
-    sliderWidth() {
-      const sliderWidth =
+    sliderScrollWidth() {
+      const calculatedSliderWidth =
         this.data.weddings.length * 240 + (this.data.weddings.length - 1 * 22);
-      return sliderWidth;
+      const sliderScrollWidth = calculatedSliderWidth / this.magicMulitiplier;
+      return sliderScrollWidth;
+    },
+    sliderWidth() {
+      const calculatedSliderWidth =
+        this.data.weddings.length * 240 + (this.data.weddings.length - 1 * 22);
+      return calculatedSliderWidth;
     },
   },
   methods: {
+    watchSliderScroll() {
+      const slider = this.$refs.slider;
+      if (!slider) {
+        return;
+      }
+      slider.addEventListener("wheel", (e) => {
+        if (e.deltaX !== 0) {
+          horizontal();
+        }
+        if (e.deltaY !== 0) {
+          vertical();
+        }
+      });
+    },
     checkSliderState() {
       const slider = this.$refs.slider;
       if (!slider) {
         return;
       }
       const scrollLeft = slider.scrollLeft;
-      const sliderEnd = this.data.weddings.length * 100 + 100;
       if (scrollLeft <= 0) {
         this.canSliderScrollLeft = false;
       } else {
         this.canSliderScrollLeft = true;
       }
 
-      if (scrollLeft >= sliderEnd) {
+      if (scrollLeft >= this.sliderScrollWidth) {
         this.canSliderScrollRight = false;
       } else {
         this.canSliderScrollRight = true;
@@ -161,6 +183,10 @@ export default {
       });
     },
     transformScroll(event) {
+      if (window.innerWidth < 980) {
+        // console.log("mobile, no freezing");
+        return;
+      }
       if (!event.deltaY) {
         return;
       }
@@ -168,11 +194,15 @@ export default {
       if (!slider) {
         return;
       }
-      slider.scrollLeft += event.deltaY + event.deltaX;
-
       const sliderStart = 0;
-      const sliderEnd = this.data.weddings.length * 100 + 100;
-      if (slider.scrollLeft < sliderEnd && slider.scrollLeft > sliderStart) {
+      // const sliderEnd = this.data.weddings.length * 100 + 100;
+      slider.scrollLeft += event.deltaY + event.deltaX;
+      // console.log(slider.scrollLeft);
+
+      if (
+        slider.scrollLeft < this.sliderScrollWidth &&
+        slider.scrollLeft > sliderStart
+      ) {
         // console.log("freeze scroll");
         event.preventDefault();
       }
@@ -250,6 +280,9 @@ export default {
     .wedding-slider-item {
       margin-right: 24px;
       overflow: hidden;
+      &:last-child {
+        margin-right: 0;
+      }
       @media (min-width: $collapse-bp) {
         flex: 0 0 240px;
         transition: 0.8s cubic-bezier(0.53, 0.21, 0.6, 0.45) all;
@@ -322,4 +355,15 @@ export default {
 .placeholder-img {
   background: $lavender;
 }
+
+// .slider-wrapper {
+//   position: relative;
+//   @media (min-width: $collapse-bp) {
+//     height: 468px;
+//     .wedding-slider-items {
+//       position: absolute;
+//       left: 0;
+//     }
+//   }
+// }
 </style>
