@@ -1,11 +1,10 @@
 <template>
   <div class="weddings-page">
     <h1 class="visually-hidden">Weddings</h1>
-
     <div v-if="data.weddings" class="weddings-slider base-container">
-      <p class="scroll-hint btn-round">
+      <!-- <p class="scroll-hint btn-round">
         <span>Scroll</span>
-      </p>
+      </p> -->
       <div class="slider-wrapper">
         <div class="wedding-slider-items" ref="slider">
           <nuxt-link
@@ -40,10 +39,28 @@
           </nuxt-link>
         </div>
       </div>
-      <div class="slider-instructions">
-        <p class="caption-style">
-          SCROLL TO EXPLORE OR CLICK AN IMAGE ABOVE FOR THE FULL GALLERY
-        </p>
+      <div class="flex-row slider-instructions">
+        <div class="text-wrapper">
+          <p class="caption-style">
+            SCROLL TO EXPLORE OR CLICK AN IMAGE ABOVE FOR THE FULL GALLERY
+          </p>
+        </div>
+        <div class="flex-row slider-controls">
+          <button
+            @click="scrollLeft"
+            :disabled="!canSliderScrollLeft"
+            class="no-btn-style icon icon-transparent chevron-left"
+          >
+            <span>Left</span>
+          </button>
+          <button
+            @click="scrollRight"
+            :disabled="!canSliderScrollRight"
+            class="no-btn-style icon icon-transparent chevron-right"
+          >
+            <span>Right</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -73,13 +90,76 @@ export default {
       title: "Weddings",
     };
   },
+  data() {
+    return {
+      scrollVal: 0,
+      canSliderScrollRight: true,
+      canSliderScrollLeft: false,
+    };
+  },
   mounted() {
     var element = document.scrollingElement || document.documentElement;
     element.addEventListener("wheel", (e) => this.transformScroll(e), {
       passive: false,
     });
   },
+  computed: {
+    sliderWidth() {
+      const sliderWidth =
+        this.data.weddings.length * 240 + (this.data.weddings.length - 1 * 22);
+      return sliderWidth;
+    },
+  },
   methods: {
+    checkSliderState() {
+      const slider = this.$refs.slider;
+      if (!slider) {
+        return;
+      }
+      const scrollLeft = slider.scrollLeft;
+      const sliderEnd = this.data.weddings.length * 100 + 100;
+      if (scrollLeft <= 0) {
+        this.canSliderScrollLeft = false;
+      } else {
+        this.canSliderScrollLeft = true;
+      }
+
+      if (scrollLeft >= sliderEnd) {
+        this.canSliderScrollRight = false;
+      } else {
+        this.canSliderScrollRight = true;
+      }
+    },
+    scrollLeft() {
+      if (!process.client) {
+        return;
+      }
+      const slider = this.$refs.slider;
+      if (!slider) {
+        return;
+      }
+
+      this.checkSliderState();
+      slider.scroll({
+        left: slider.scrollLeft - 100,
+        behavior: "smooth",
+      });
+    },
+    scrollRight() {
+      if (!process.client) {
+        return;
+      }
+      const slider = this.$refs.slider;
+      if (!slider) {
+        return;
+      }
+      this.checkSliderState();
+
+      slider.scroll({
+        left: slider.scrollLeft + 100,
+        behavior: "smooth",
+      });
+    },
     transformScroll(event) {
       if (!event.deltaY) {
         return;
@@ -106,6 +186,37 @@ export default {
   @include headerMargin();
   .slider-instructions {
     margin-top: 24px;
+    justify-content: space-between;
+    .text-wrapper {
+      flex: 0 0 60%;
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+  .slider-controls {
+    align-items: flex-end;
+    button {
+      padding: 22px;
+      padding-bottom: 0;
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+
+    button:disabled {
+      opacity: 0.25;
+    }
+    .icon {
+      &:after {
+        background-color: $charcoal;
+        transition: 0.3s ease all;
+        width: 16px;
+        height: 16px;
+      }
+      &:hover:after {
+        background-color: $coral;
+      }
+    }
   }
   .weddings-slider {
     padding: 127px 0;
@@ -138,6 +249,7 @@ export default {
     }
     .wedding-slider-item {
       margin-right: 24px;
+      overflow: hidden;
       @media (min-width: $collapse-bp) {
         flex: 0 0 240px;
         transition: 0.8s cubic-bezier(0.53, 0.21, 0.6, 0.45) all;

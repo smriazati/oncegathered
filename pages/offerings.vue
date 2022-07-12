@@ -124,9 +124,17 @@ export default {
   @media (min-width: $collapse-bp) {
     padding: 90px;
   }
+  @media (max-width: $collapse-bp) {
+    margin-top: $xl-spacer;
+  }
   .offerings-list-item {
     .cta-button-wrapper {
       margin-top: 48px;
+    }
+  }
+  .text-wrapper {
+    @media (max-width: $collapse-bp) {
+      text-align: left;
     }
   }
 }
