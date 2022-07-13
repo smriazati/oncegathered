@@ -15,7 +15,13 @@
             <nuxt-link :to="`/weddings/${item.slug.current}`">
               <figure>
                 <img
-                  :src="$urlFor(item.img.url).width(716).height(1008).url()"
+                  :src="
+                    $urlFor(item.img.url)
+                      .width(716)
+                      .height(1008)
+                      .auto('format')
+                      .url()
+                  "
                   :alt="item.img.alt"
                   width="358"
                   height="504"

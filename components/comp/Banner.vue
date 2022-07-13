@@ -4,7 +4,7 @@
       <figure ref="img">
         <img
           @load="handleLoad"
-          :src="$urlFor(data.img.url).width(984).url()"
+          :src="$urlFor(data.img.url).width(984).auto('format').url()"
           :alt="data.img.alt"
           width="984"
         />

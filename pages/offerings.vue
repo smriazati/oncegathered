@@ -7,7 +7,7 @@
           <div class="image-wrapper">
             <figure v-if="data">
               <img
-                :src="$urlFor(data.img.url).width(750).url()"
+                :src="$urlFor(data.img.url).width(750).auto('format').url()"
                 :alt="data.img.alt"
               />
             </figure>

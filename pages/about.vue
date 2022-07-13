@@ -8,7 +8,12 @@
             <div v-if="data.featuredImg" class="image-wrapper-wrapper">
               <figure v-if="data.featuredImg.url">
                 <img
-                  :src="$urlFor(data.featuredImg.url).width(750).url()"
+                  :src="
+                    $urlFor(data.featuredImg.url)
+                      .width(750)
+                      .auto('format')
+                      .url()
+                  "
                   :alt="data.featuredImg.alt"
                 />
               </figure>

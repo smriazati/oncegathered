@@ -30,7 +30,12 @@
           <div class="image-wrapper">
             <figure v-if="data.content.quote.img.url">
               <img
-                :src="$urlFor(data.content.quote.img.url).width(984).url()"
+                :src="
+                  $urlFor(data.content.quote.img.url)
+                    .width(984)
+                    .auto('format')
+                    .url()
+                "
                 :alt="data.content.quote.img"
                 width="984"
               />

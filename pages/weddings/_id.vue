@@ -41,9 +41,12 @@
           <figure>
             <img
               @load="handleLoad"
-              :src="$urlFor(data.featuredImg.url).width(480).url()"
+              :data-src="
+                $urlFor(data.featuredImg.url).width(960).auto('format').url()
+              "
               :alt="data.featuredImg.alt"
               width="480"
+              v-lazy-load
             />
           </figure>
         </div>
@@ -51,9 +54,10 @@
           <figure v-for="item in data.gallery" :key="item._key">
             <img
               @load="handleLoad"
-              :src="$urlFor(item.url).width(480).url()"
+              :data-src="$urlFor(item.url).width(960).auto('format').url()"
               :alt="item.alt"
               width="480"
+              v-lazy-load
             />
           </figure>
         </div>
@@ -98,7 +102,7 @@ export default {
   head() {
     return {
       title: `${
-        this.data.location.name
+        this.data?.location.name
           ? ` ${this.data?.names} at ${this.data?.location.name}`
           : ` ${this.data?.names}`
       }`,
@@ -107,7 +111,7 @@ export default {
           hid: "description",
           name: "description",
           content: `${
-            this.data.location.name
+            this.data?.location.name
               ? ` ${this.data?.names} wedding at ${this.data?.location.name}`
               : ` ${this.data?.names} wedding`
           } with flowers by Once Gathered.`,
@@ -150,17 +154,38 @@ export default {
       });
       resize_ob.observe(wrapper);
     },
-    handleLoad() {
+    handleLoad(e) {
       this.imagesLoaded++;
-      // console.log("img loaded");
-
       this.$nextTick(() => {
-        this.setAnimation();
+        this.setAnimations(e.target);
       });
     },
-    setAnimation() {
+    setAnimations(target) {
+      this.setPinTextAnimation();
+      this.setImgAnimation(target);
+    },
+    setImgAnimation(img) {
+      // console.log(img);
+      gsap.set(img, {
+        opacity: 0,
+        height: "0%",
+        yPercent: 10,
+      });
+      gsap.to(img, {
+        opacity: 1,
+        height: "100%",
+        yPercent: 0,
+        duration: 0.5,
+        scrollTrigger: {
+          trigger: img,
+          start: "top bottom",
+          // markers: true,
+        },
+      });
+    },
+    setPinTextAnimation() {
       if (window.innerWidth < 980) {
-        console.log("cancelling anim, is mobile");
+        // console.log("cancelling anim, is mobile");
         return;
       }
       const footer = document.querySelector("footer.site-footer");
@@ -234,6 +259,25 @@ export default {
 
 <style lang="scss">
 .wedding-page {
+  .lazyLoad,
+  [data-src] {
+    opacity: 0;
+    transition: 0.5s ease opacity;
+    img {
+      opacity: 0;
+      transition: 0.5s ease opacity;
+    }
+  }
+
+  .lazyLoad.isLoaded,
+  .lazyLoad[data-src=""],
+  svg[data-src] {
+    opacity: 1;
+    img {
+      opacity: 1;
+    }
+  }
+
   @include headerMargin;
   padding: 33px 0;
   .pagination {
@@ -248,55 +292,6 @@ export default {
       bottom: 5px;
     }
   }
-
-  // .wedding-page-wrapper {
-  //   .grid-wrapper {
-  //     .text-wrapper {
-  //       @media (min-width: $collapse-bp) {
-  //         grid-row: 1 / 2;
-  //         grid-column: 1 / 5;
-  //       }
-  //       @media (max-width: $collapse-bp) {
-  //         grid-row: 1 / 2;
-  //         grid-column: 1 / 2;
-  //       }
-  //     }
-  //     .galleries-wrapper {
-  //       @media (min-width: $collapse-bp) {
-  //         grid-row: 1 / 2;
-  //         grid-column: 5 / 8;
-  //       }
-  //       @media (max-width: $collapse-bp) {
-  //         grid-row: 1 / 2;
-  //         grid-column: 1 / 2;
-  //       }
-  //     }
-  //   }
-  //   // display: grid;
-  //   // grid-template-columns: 100%;
-  //   // @media (min-width: $collapse-bp) {
-  //   //   grid-template-rows: 100%;
-  //   // }
-  //   // @media (max-width: $collapse-bp) {
-  //   //   grid-auto-rows: min-content;
-  //   // }
-  //   // > * {
-  //   //   @media (min-width: $collapse-bp) {
-  //   //     grid-row: 1 / 2;
-  //   //     grid-column: 1 / 2;
-  //   //   }
-  //   //   @media (max-width: $collapse-bp) {
-  //   //     &.grid-wrapper-text {
-  //   //       grid-row: 1 / 2;
-  //   //       grid-column: 1 / 2;
-  //   //     }
-  //   //     &.grid-wrapper-gallery {
-  //   //       grid-row: 2 / 3;
-  //   //       grid-column: 1 / 2;
-  //   //     }
-  //   //   }
-  //   // }
-  // }
 
   .grid-wrapper-text {
     width: 100%;
@@ -325,6 +320,7 @@ export default {
         grid-column: 1 / span 4;
         grid-row: 1 / 2;
         place-self: center;
+        min-height: 300px;
       }
     }
     .gallery-wrapper {
@@ -352,8 +348,16 @@ export default {
     }
   }
 
+  .image-wrapper,
   .gallery-wrapper {
-    margin-top: 36px;
+    figure {
+      overflow: hidden;
+    }
+  }
+  .gallery-wrapper {
+    @media (min-width: $collapse-bp) {
+      margin-top: 36px;
+    }
     figure {
       width: 100%;
       padding-bottom: 36px;

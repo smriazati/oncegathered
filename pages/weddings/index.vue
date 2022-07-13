@@ -21,6 +21,7 @@
                     $urlFor(item.img.url)
                       .width(480 * 2)
                       .height(433 * 2)
+                      .auto('format')
                       .url()
                   "
                   :alt="item.img.alt"
