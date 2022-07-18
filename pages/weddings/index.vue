@@ -217,6 +217,9 @@ export default {
   @include headerMargin();
   .slider-instructions {
     margin-top: 24px;
+    @media (max-width: $collapse-bp) {
+      margin-bottom: 24px;
+    }
     justify-content: space-between;
     .text-wrapper {
       flex: 0 0 60%;
@@ -250,7 +253,7 @@ export default {
     }
   }
   .weddings-slider {
-    padding: 127px 0;
+    padding: 1% 0;
     overflow: hidden;
     @media (min-width: $collapse-bp) {
       position: relative;
@@ -289,7 +292,7 @@ export default {
         transition: 0.8s cubic-bezier(0.53, 0.21, 0.6, 0.45) all;
       }
       @media (max-width: $collapse-bp) {
-        flex: 0 0 50%;
+        flex: 0 0 240px;
       }
 
       figure {
@@ -325,6 +328,9 @@ export default {
             p {
               white-space: nowrap;
             }
+          }
+          @media (max-width: $collapse-bp) {
+            display: none;
           }
 
           p + p {

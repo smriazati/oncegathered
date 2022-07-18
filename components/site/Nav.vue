@@ -3,7 +3,7 @@
     <div class="site-nav-wrapper">
       <nav class="main-nav">
         <ul>
-          <li><nuxt-link to="/" class="lg-screen-hide">Home</nuxt-link></li>
+          <li class="lg-screen-hide"><nuxt-link to="/">Home</nuxt-link></li>
           <li><nuxt-link to="/weddings">Weddings</nuxt-link></li>
           <li><nuxt-link to="/offerings">Offerings</nuxt-link></li>
           <li><nuxt-link to="/about">About</nuxt-link></li>

@@ -4,8 +4,8 @@
       <h1 class="brand">
         <nuxt-link to="/">
           <span class="visually-hidden">Once Gathered</span>
-          <SiteLogo v-if="!isMobile" :width="330" />
-          <SiteStackedLogo v-else :width="330" />
+          <SiteLogo v-if="!isMobile" :width="400" />
+          <SiteStackedLogo v-else :width="400" />
         </nuxt-link>
       </h1>
       <button @click="toggleMenu()" id="menuControl">

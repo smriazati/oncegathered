@@ -1,31 +1,35 @@
 <template>
   <div class="alaCarte-page">
     <div class="alaCarte-page-wrapper">
-      <div class="page-intro">
-        <div class="page-intro-wrapper">
+      <div class="page-intro-2">
+        <div v-if="data" class="page-intro-wrapper">
           <div class="image-wrapper">
-            <figure v-if="data">
-              <img :src="data.img.url" :alt="data.img.alt" />
-            </figure>
+            <div v-if="data.img" class="image-wrapper-wrapper">
+              <figure v-if="data.img.url">
+                <img :src="data.img.url" :alt="data.img.alt" />
+              </figure>
+            </div>
           </div>
-          <div class="flex-col text-wrapper">
-            <h1>A La Carte Orders</h1>
-            <ol>
-              <li>Answer questions below.</li>
-              <li>List which items you would like to order.</li>
-              <li>
-                Please list if you ever need any extra greenery or other items
-                if you are a planner.
-              </li>
-              <li>Click Submit.</li>
-              <li>We will send you a custom invoice.</li>
-              <li>Pick up your flowers!</li>
-            </ol>
-            <p class="small">
-              Please note, floral varieties and availability depend on
-              seasonality and we will do the best to source what we can within
-              your inspiration.
-            </p>
+          <div class="text-wrapper">
+            <div class="flex-col text-wrapper-wrapper">
+              <h1>A La Carte Orders</h1>
+              <ol>
+                <li>Answer questions below.</li>
+                <li>List which items you would like to order.</li>
+                <li>
+                  Please list if you ever need any extra greenery or other items
+                  if you are a planner.
+                </li>
+                <li>Click Submit.</li>
+                <li>We will send you a custom invoice.</li>
+                <li>Pick up your flowers!</li>
+              </ol>
+              <p class="small note">
+                Please note, floral varieties and availability depend on
+                seasonality and we will do the best to source what we can within
+                your inspiration.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -69,68 +73,37 @@ export default {
 
 <style lang="scss">
 .alaCarte-page {
-  .page-intro {
+  .page-intro-2 {
     background: $buttercream;
-    .page-intro-wrapper {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: auto;
-
-      @media (max-width: $collapse-bp) {
-        display: flex;
-        flex-direction: column;
+    h1 {
+      margin-bottom: 31px;
+      @include bodyTypeface;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 25px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    ol {
+      padding-left: 20px;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0em;
+      li:not(:last-child) {
+        margin-bottom: 10px;
       }
-      .image-wrapper {
-        overflow: hidden;
-        @media (max-width: $collapse-bp) {
-          min-height: 100vw;
-        }
-        figure {
-          width: 100%;
-          height: 100%;
-          img {
-            min-width: 100%;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center center;
-          }
-        }
-      }
-      .text-wrapper {
-        padding: 120px 60px;
-        justify-content: center;
-        > *:not(:last-child) {
-          padding-bottom: 60px;
-        }
-        h1 {
-          @include bodyTypeface;
-          font-size: 18px;
-          font-style: normal;
-          font-weight: 400;
-          line-height: 25px;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-        }
-        ol {
-          padding-left: 20px;
-          font-size: 16px;
-          font-style: normal;
-          font-weight: 400;
-          line-height: 20px;
-          letter-spacing: 0em;
-          li:not(:last-child) {
-            margin-bottom: 10px;
-          }
-        }
-        p.small {
-          font-size: 12px;
-          font-style: italic;
-          font-weight: 400;
-          line-height: 16px;
-          letter-spacing: 0.02em;
-        }
-      }
+    }
+    p.small {
+      margin-top: 80px;
+      @include sansSerifTypeface;
+      font-size: 12px;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 16px;
+      letter-spacing: 0.02em;
     }
   }
 }

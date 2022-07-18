@@ -35,7 +35,7 @@
     </nav>
     <div class="footer-text">
       <p>
-        © {{ currentYear }} Once Gathered.
+        © {{ currentYear }} Once Gathered LLC
         <a href="https://www.otherlove.co" target="_blank" class="link-inherit"
           >Made with Otherlove.</a
         >

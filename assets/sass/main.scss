@@ -317,6 +317,7 @@ input {
       .text-wrapper-wrapper {
         @media (min-width: $collapse-bp) {
           width: 75%;
+          margin-bottom: 96px;
         }
 
         @media (max-width: $collapse-bp) {

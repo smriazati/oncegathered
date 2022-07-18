@@ -15,6 +15,9 @@
           :forwardSpeed="speed"
         />
       </figure>
+      <div class="bottom-text">
+        <h2 class="title-style">Floral Design</h2>
+      </div>
     </div>
   </section>
 </template>
@@ -71,5 +74,13 @@ export default {
     opacity: 0;
     z-index: 0;
   }
+}
+
+.bottom-text {
+  position: fixed;
+  bottom: 24px;
+  left: 0;
+  width: 100%;
+  text-align: center;
 }
 </style>

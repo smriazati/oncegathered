@@ -102,13 +102,14 @@ export default {
     .text-wrapper {
       text-align: center;
       .title {
-        @include displayTypeface;
-        font-size: 48px;
-        font-style: normal;
-        font-weight: 300;
-        line-height: 42px;
-        letter-spacing: 0em;
-        text-align: center;
+        // @include displayTypeface;
+        // font-size: 48px;
+        // font-style: normal;
+        // font-weight: 300;
+        // line-height: 42px;
+        // letter-spacing: 0em;
+        // text-align: center;
+        @include displayStyle;
       }
       .price {
         //styleName: Body;

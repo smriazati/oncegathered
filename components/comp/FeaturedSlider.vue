@@ -63,7 +63,7 @@ export default {
         grid-row: 1 / 2;
         grid-column: 2 / 4;
         text-align: center;
-        overflow-wrap: break-word;
+        // overflow-wrap: break-word;
         width: 50%;
         margin: 0 auto;
       }

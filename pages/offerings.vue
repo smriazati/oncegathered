@@ -107,9 +107,6 @@ export default {
 .offerings-page {
   .page-intro-2 {
     .text-wrapper {
-      @media (min-width: $collapse-bp) {
-        padding-bottom: 90px;
-      }
       h1 {
         margin-bottom: 22px;
       }

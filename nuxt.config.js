@@ -63,7 +63,7 @@ export default async() => {
       {
         src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js"
       },
-
+      { hid: 'plausible', src: 'https://plausible.io/js/plausible.js', defer: true, "data-domain":"oncegathered.com" }
     ]
   },
 

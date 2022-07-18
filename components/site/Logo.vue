@@ -2,7 +2,7 @@
   <span v-if="content">
     <figure>
       <img
-        :src="$urlFor(content.logo.url)"
+        :src="$urlFor(content.logo.url).size(width * 2)"
         :alt="content.logo.alt"
         :width="width"
       />

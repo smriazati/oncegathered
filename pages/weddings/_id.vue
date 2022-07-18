@@ -283,7 +283,7 @@ export default {
   .pagination {
     position: fixed;
     @media (min-width: $collapse-bp) {
-      right: 0;
+      right: 60px;
       top: calc(50vh - 38px);
     }
 
