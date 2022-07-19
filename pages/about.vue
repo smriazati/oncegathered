@@ -10,7 +10,7 @@
                 <img
                   :src="
                     $urlFor(data.featuredImg.url)
-                      .width(750)
+                      .width(1500)
                       .auto('format')
                       .url()
                   "
@@ -92,6 +92,11 @@ export default {
         }
       }
     }
+  }
+}
+.about-page {
+  .page-intro-2 .page-intro-wrapper .image-wrapper figure img {
+    object-position: top center;
   }
 }
 </style>

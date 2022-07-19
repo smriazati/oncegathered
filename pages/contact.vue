@@ -7,7 +7,7 @@
             <figure v-if="data.page.img.url">
               <img
                 :src="
-                  $urlFor(data.page.img.url).width(750).auto('format').url()
+                  $urlFor(data.page.img.url).width(1500).auto('format').url()
                 "
                 :alt="data.page.img.alt"
               />

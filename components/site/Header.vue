@@ -75,9 +75,11 @@ export default {
       span  {
         font-size: 14px;
       }
+
       @media (min-width: $collapse-bp) {
         grid-column: 1 / 3;
         grid-row: 1 / 2;
+        margin-left: 8px;
       }
       @media (max-width: $collapse-bp) {
         grid-column: 1 / span 4;
