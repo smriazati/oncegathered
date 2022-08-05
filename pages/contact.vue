@@ -110,7 +110,7 @@ export default {
       ],
     };
   },
-  mounted() {
+  beforeMount() {
     const h = window;
     const i = `62debb5ca0c7bc0008d17388`;
     h._HB_ = h._HB_ || {};
