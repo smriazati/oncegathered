@@ -64,6 +64,17 @@
           </div>
         </div>
       </div>
+      <div class="honeybook-wrapper">
+        <client-only>
+          <div class="hb-p-62debb5ca0c7bc0008d17388-1"></div>
+          <img
+            height="1"
+            width="1"
+            style="display: none"
+            src="https://www.honeybook.com/p.png?pid=62debb5ca0c7bc0008d17388"
+          />
+        </client-only>
+      </div>
     </div>
   </div>
 </template>
@@ -90,7 +101,20 @@ export default {
   head() {
     return {
       title: "Contact",
+      script: [
+        {
+          type: "text/javascript",
+          src: "https://widget.honeybook.com/assets_users_production/websiteplacements/placement-controller.min.js",
+          async: true,
+        },
+      ],
     };
+  },
+  mounted() {
+    const h = window;
+    const i = `62debb5ca0c7bc0008d17388`;
+    h._HB_ = h._HB_ || {};
+    h._HB_.pid = i;
   },
   async asyncData({ $sanity }) {
     const data = await $sanity.fetch(query1).then((res) => res);
@@ -168,5 +192,9 @@ export default {
   line-height: 25px;
   font-style: italic;
   letter-spacing: 0.04em;
+}
+.honeybook-wrapper {
+  padding: 80px 0;
+  background: #4c552c;
 }
 </style>
