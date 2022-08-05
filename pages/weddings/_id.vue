@@ -131,12 +131,19 @@ export default {
     this.registerScrollTrigger();
     this.watchDivHeight();
     this.setNextBtn();
+    this.setTextLeftMargin();
+    this.$nextTick(() => {
+      window.addEventListener("resize", this.onResize);
+    });
   },
   beforeDestroy() {
     // console.log("killing st");
     ScrollTrigger.getAll().forEach((t) => t.kill());
   },
   methods: {
+    onResize() {
+      this.setTextLeftMargin();
+    },
     registerScrollTrigger() {
       if (!gsap) {
         return;
@@ -161,7 +168,7 @@ export default {
       });
     },
     setAnimations(target) {
-      this.setPinTextAnimation();
+      // this.setPinTextAnimation();
       this.setImgAnimation(target);
     },
     setImgAnimation(img) {
@@ -183,30 +190,51 @@ export default {
         },
       });
     },
-    setPinTextAnimation() {
+    setTextLeftMargin() {
+      const wrapper = this.$refs.wrapper;
+      if (!wrapper) {
+        return;
+      }
+      const text = wrapper.querySelector(".text-wrapper");
+      const grid = wrapper.querySelector(".grid-wrapper");
+      if (!grid || !text) {
+        return;
+      }
       if (window.innerWidth < 980) {
-        // console.log("cancelling anim, is mobile");
+        text.style.marginLeft = `${0}px`;
         return;
       }
-      const footer = document.querySelector("footer.site-footer");
-      // console.log(footer);
-      const text = this.$refs.text;
-      if (!footer || !text) {
-        return;
-      }
-      gsap.from(text, {
-        scrollTrigger: {
-          trigger: text,
-          start: "top top",
-          endTrigger: footer,
-          end: "bottom top",
-          pin: true,
-          pinSpacing: false,
-          scrub: 1.1,
-          // markers: true,
-        },
-      });
+      const gridW = grid.offsetWidth;
+      const textW = text.offsetWidth;
+      const gutterW = 30;
+      const textOffsetLeft = (gridW / 2 - gutterW - textW) / 2;
+      // console.log(gridW, textW, textOffsetLeft);
+      text.style.marginLeft = `${textOffsetLeft}px`;
     },
+    // setPinTextAnimation() {
+    //   if (window.innerWidth < 980) {
+    //     // console.log("cancelling anim, is mobile");
+    //     return;
+    //   }
+    //   const footer = document.querySelector("footer.site-footer");
+    //   // console.log(footer);
+    //   const text = this.$refs.text;
+    //   if (!footer || !text) {
+    //     return;
+    //   }
+    //   gsap.from(text, {
+    //     scrollTrigger: {
+    //       trigger: text,
+    //       start: "top top",
+    //       endTrigger: footer,
+    //       end: "bottom top",
+    //       pin: true,
+    //       pinSpacing: false,
+    //       scrub: 1.1,
+    //       // markers: true,
+    //     },
+    //   });
+    // },
     async setNextBtn() {
       const allWeddingsQuery = groq`*[_type == "weddings"]|order(_createdAt asc)`;
       const allWeddings = await this.$sanity
@@ -304,7 +332,9 @@ export default {
       @media (min-width: $collapse-bp) {
         grid-column: 1 / span 4;
         grid-row: 1 / 3;
-        padding-top: 25vh;
+        // padding-top: 25vh;
+        position: fixed;
+        top: calc(50vh - 38px);
       }
       @media (max-width: $collapse-bp) {
         grid-column: 1 / span 4;

@@ -218,7 +218,7 @@ export default {
   .slider-instructions {
     margin-top: 24px;
     @media (max-width: $collapse-bp) {
-      margin-bottom: 24px;
+      margin-bottom: 32px;
     }
     justify-content: space-between;
     .text-wrapper {
